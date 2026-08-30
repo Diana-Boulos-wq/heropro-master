@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173f38">
+<title>Hero Pro · Master v12 · funktional</title>
+<style>
+:root{--bg:#f5f8f7;--card:#fff;--ink:#17332e;--muted:#5f726c;--line:#d9e5e1;--p:#176b5b;--p2:#0f5447;--soft:#e5f3ee;--warn:#fff4d9;--danger:#ffe8e7;--shadow:0 12px 34px rgba(23,51,46,.09)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 0 0,#e3f2ed,transparent 35%),radial-gradient(circle at 100% 10%,#e8eefc,transparent 30%),var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1180px;margin:auto;padding:14px 16px 60px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:30;padding:10px 2px 14px;background:rgba(245,248,247,.9);backdrop-filter:blur(16px)}
+.brand{display:flex;align-items:center;gap:11px}.brandmark{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#d9eee8);box-shadow:var(--shadow);font-size:22px}.brand h1{margin:0;font-size:20px}.brand p{margin:2px 0 0;font-size:11px;color:var(--muted)}
+.badge{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:800;color:var(--p)}
+.hero{display:grid;grid-template-columns:1.5fr .8fr;gap:0;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#153b35,#1b6d5e 60%,#2d8b76);color:#fff;box-shadow:var(--shadow)}
+.hero-main{padding:34px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.12em;opacity:.8}.hero h2{font-size:36px;line-height:1.05;letter-spacing:-.03em;margin:10px 0}.hero p{color:rgba(255,255,255,.86);line-height:1.6}.hero-side{margin:18px;padding:20px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);border-radius:22px;align-self:stretch}.focus{display:flex;gap:12px;align-items:center}.focus-icon{width:44px;height:44px;border-radius:14px;background:#fff;color:var(--p);display:grid;place-items:center;font-size:22px}.focus strong{display:block}.focus span{display:block;color:rgba(255,255,255,.9);font-size:12px}.progress{height:9px;background:rgba(255,255,255,.25);border-radius:99px;overflow:hidden;margin:18px 0 7px}.progress>i{display:block;height:100%;background:#fff;border-radius:99px}
+.nav{display:flex;gap:6px;overflow:auto;position:sticky;top:70px;z-index:25;margin:14px 0;padding:7px;border:1px solid var(--line);border-radius:19px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:var(--shadow)}.nav button{border:0;background:transparent;color:var(--muted);padding:10px 12px;border-radius:13px;font-weight:800;white-space:nowrap;font-size:12px}.nav button.active{background:var(--soft);color:var(--p)}
+.page{display:none}.page.active{display:block;animation:in .18s ease}@keyframes in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{background:rgba(255,255,255,.97);border:1px solid var(--line);border-radius:22px;padding:19px;box-shadow:var(--shadow)}.head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.head h3{margin:0 0 4px;font-size:17px}.sub{color:var(--muted);font-size:12px;line-height:1.5}.feature,.stat,.item{background:#f4f8f6;border:1px solid var(--line);border-radius:16px;padding:13px}.feature h4{margin:0 0 6px}.stat strong{display:block;font-size:20px}.small{font-size:11px;color:var(--muted);line-height:1.5}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 13px;border-radius:13px;font-weight:800}.btn.primary{background:var(--p);color:#fff;border-color:var(--p)}.btn.soft{background:var(--soft);color:var(--p)}.btn.danger{background:var(--danger);color:#8b2521}.btn.light{background:#fff;color:var(--p)}
+input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:13px;padding:10px 11px;margin:5px 0;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(23,107,91,.1)}
+label{display:block;font-size:11px;font-weight:800;margin-top:7px}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}.pill{display:inline-block;padding:6px 9px;border-radius:999px;background:var(--soft);color:var(--p);font-size:10px;font-weight:900}.note{padding:11px;border-radius:14px;background:var(--warn);font-size:11px}.ok{padding:11px;border-radius:14px;background:#e7f6ed;font-size:11px}.dangerbox{padding:11px;border-radius:14px;background:var(--danger);font-size:11px}
+.profile-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.profile{border:1px solid var(--line);background:#fff;border-radius:18px;padding:14px;text-align:left}.profile.active{border:2px solid var(--p);background:var(--soft)}.avatar{width:42px;height:42px;border-radius:14px;background:var(--soft);display:grid;place-items:center;font-size:20px;margin-bottom:8px}
+.schedule{display:grid;gap:8px}.step{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid var(--line);border-radius:16px;background:#fff}.step.done{background:var(--soft);text-decoration:line-through}.step .pic{width:44px;height:44px;border-radius:13px;background:#edf5f2;display:grid;place-items:center;font-size:23px}.chat{min-height:150px;max-height:300px;overflow:auto;padding:10px;border:1px solid var(--line);border-radius:16px;background:#f8fbfa}.bubble{padding:9px 11px;border-radius:14px;background:#e8f2ef;margin:6px 0;max-width:90%;font-size:12px}.bubble.me{margin-left:auto;background:#dceef8}.list{display:grid;gap:7px}.check{display:flex;gap:9px;align-items:center}.check input{width:auto}
+@media(max-width:780px){.app{padding:8px 11px 45px}.hero{grid-template-columns:1fr}.hero-main{padding:25px 20px}.hero h2{font-size:29px}.grid,.grid3{grid-template-columns:1fr}.profile-grid{grid-template-columns:1fr 1fr}.nav{top:62px}.hero-side{margin:0 16px 16px}}
+@media(max-width:430px){.profile-grid{grid-template-columns:1fr}.badge{display:none}}
+</style>
+<style>
+/* Final accessibility/contrast pass */
+#focusTitle{color:#fff!important;font-weight:900}#focusText{color:#fff!important}#focusText,#focusTitle{opacity:1;text-shadow:0 1px 2px rgba(0,0,0,.15)}
+.page .card .sub,.page .small{color:#405b54!important}
+.btn{cursor:pointer}.nav{position:sticky;top:0;z-index:20;background:rgba(245,248,247,.96);backdrop-filter:blur(10px)}
+.role-help{background:#eef8f4;border:1px solid #cfe5dd;border-radius:16px;padding:12px;margin-top:10px;color:#244a41}
+.profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.profile{border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px;text-align:left}.profile.active{border:3px solid var(--p);background:#eaf7f2}.profile .avatar{font-size:28px;margin-bottom:7px}
+
+.feature .btn,.card .btn{min-height:38px}
+</style>
+<style>
+.floating-music{position:fixed;right:16px;bottom:82px;width:54px;height:54px;border-radius:50%;border:2px solid #fff;background:#176b5b;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:9999;font-size:23px;cursor:pointer}
+.floating-music.on{background:#0f5447}
+.delete-mini{border:0;border-radius:10px;padding:7px 10px;background:#ffe8e7;color:#8d2520;font-weight:700;cursor:pointer}
+.edit-mini{border:0;border-radius:10px;padding:7px 10px;background:#e5f3ee;color:#176b5b;font-weight:700;cursor:pointer}
+.item-actions{display:flex;gap:7px;align-items:center;margin-left:auto}
+.interactive-panel{margin-top:12px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#f8fbfa}
+</style>
+
+<script>
+/* HERO PRO — CENTRAL INTEGRATION CONTRACT
+   Privileged credentials NEVER belong in this HTML.
+   External services are connected through authenticated backend/native bridges.
+*/
+window.HeroProIntegration = {
+  version: "1.0",
+  googleGemini: {
+    consentKey: "heroProGoogleConsent",
+    startUrl: "/api/google/start",
+    geminiUrl: "/api/gemini",
+    revokeUrl: "/api/google/revoke"
+  },
+  device: {
+    bridgeName: "HeroProAndroid",
+    grantApp: function(packageName, minutes){
+      const policy={action:"grant_timed",packageName,minutes};
+      if(window.HeroProAndroid?.requestDevicePolicy)
+        return window.HeroProAndroid.requestDevicePolicy(JSON.stringify(policy));
+      return {status:"native_bridge_required",policy};
+    },
+    revokeApp: function(packageName){
+      const policy={action:"revoke",packageName};
+      if(window.HeroProAndroid?.requestDevicePolicy)
+        return window.HeroProAndroid.requestDevicePolicy(JSON.stringify(policy));
+      return {status:"native_bridge_required",policy};
+    }
+  },
+  gps: {
+    send: function(position){
+      const payload={
+        lat:position.coords.latitude,
+        lon:position.coords.longitude,
+        accuracy:position.coords.accuracy,
+        timestamp:Date.now()
+      };
+      if(window.HeroProAndroid?.sendLocation)
+        return window.HeroProAndroid.sendLocation(JSON.stringify(payload));
+      return {status:"native_or_backend_bridge_required",payload};
+    }
+  }
+};
+</script>
+
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand"><div class="brandmark">🛡️☀️</div><div><h1>Hero Pro</h1><p>Lernbegleitung · Familie · Schule · Kommunikation</p></div></div><span class="badge">Einfach · Sicher · Persönlich</span></header>
+
+<section class="hero"><div class="hero-main"><div class="eyebrow">Dein persönlicher Lern- & Familienbegleiter</div><h2>Alles Wichtige an einem ruhigen, sicheren Ort.</h2><p>Individuell für Kinder, Eltern und Schule – mit Lernen, Alltag, Kommunikation, Förderung und Sicherheit.</p><div class="actions"><button class="btn light" onclick="show('learning')">🧠 Lernen öffnen</button><button class="btn light" onclick="show('profiles')">👤 Profil bearbeiten</button></div></div><aside class="hero-side"><div class="focus"><div class="focus-icon">🌱</div><div><strong id="focusTitle">Individuell</strong><span id="focusText">Unterstützung passend zum Profil</span></div></div><div class="progress"><i id="heroProgress" style="width:20%"></i></div><div class="small" style="color:#fff">⭐ <span id="stars">1</span> / <span id="goal">5</span> Sterne</div></aside></section>
+
+<nav class="nav">
+<button class="active" data-page="home" onclick="show('home')">🏠 Start</button>
+<button data-page="learning" onclick="show('learning')">📚 Lernen & Nachhilfe</button>
+<button data-page="groups" onclick="show('groups')">👥 Meine Lerngruppe</button>
+<button data-page="games" onclick="show('games')">🎮 Spiele & Pause</button>
+<button data-page="music" onclick="show('music')">🎵 Musik & Instrumente</button>
+<button data-page="languages" onclick="show('languages')">🌍 Sprachen</button>
+<button data-page="support" onclick="show('support')">🧩 Förderung</button>
+<button data-page="preschool" onclick="show('preschool')">🧸 Vorschule</button>
+<button data-page="daily" onclick="show('daily')">🗓️ Mein Tag</button>
+<button data-page="assistant" onclick="show('assistant')">🗣️ Hero / Google</button>
+<button data-page="profiles" onclick="show('profiles')">👤 Profil</button>
+<button data-page="appsettings" onclick="show('appsettings')">⚙️ Einstellungen</button>
+<button data-page="family" onclick="show('family')">👨‍👩‍👧 Eltern</button>
+<button data-page="school" onclick="show('school')">🏫 Schule</button>
+<button data-page="classroom" onclick="show('classroom')">🏫 Klassenraum</button>
+<button data-page="messages" onclick="show('messages')">💬 Nachrichten</button>
+<button data-page="safety" onclick="show('safety')">🛡️ Sicherheit</button>
+<button data-page="integrations" onclick="show('integrations')">🔗 Schnittstellen</button>
+</nav>
+
+<main>
+<section id="masterHome" class="page active">
+  <div class="card">
+    <div class="head">
+      <div>
+        <h2>🏠 Was möchtest du heute machen?</h2>
+        <div class="sub">Alles Wichtige direkt erreichbar – ohne versteckte Funktionen.</div>
+      </div>
+      <span class="pill">Hero Pro</span>
+    </div>
+    <div class="grid3" style="margin-top:14px">
+      <button class="feature btn" onclick="show('learning')">📚 Lernen & Nachhilfe</button>
+      <button class="feature btn" onclick="show('groups')">👥 Meine Lerngruppe</button>
+      <button class="feature btn" onclick="show('games')">🎮 Spiele & Pause</button>
+      <button class="feature btn" onclick="show('music')">🎵 Musik & Instrumente</button>
+      <button class="feature btn" onclick="show('languages')">🌍 Sprachen</button>
+      <button class="feature btn" onclick="show('support')">🧩 Förderung</button>
+      <button class="feature btn" onclick="show('rewards')">⭐ Aufgaben & Belohnungen</button>
+      <button class="feature btn" onclick="show('preschool')">🧸 Vorschule</button>
+      <button class="feature btn" onclick="show('daily')">🗓️ Mein Tag</button>
+      <button class="feature btn" onclick="show('assistant')">🗣️ Hero / Google</button>
+      <button class="feature btn" onclick="show('googleConnect')">🔐 Google / Gemini verbinden</button>
+    </div>
+    <div class="note" style="margin-top:14px">
+      Externe Dienste werden nur nach ausdrücklicher Zustimmung verbunden. Hero Pro enthält keine eigene KI.
+    </div>
+  </div>
+</section>
+
+<section id="home" class="page"><div class="grid">
+<div class="card"><div class="head"><div><h3>Heute</h3><div class="sub">Dein Tagesüberblick</div></div><span class="pill" id="profileBadge">Kind</span></div><div class="grid3" style="margin-top:12px"><div class="stat"><strong>3</strong><span class="small">Lernschritte</span></div><div class="stat"><strong>1</strong><span class="small">Aufgabe</span></div><div class="stat"><strong>5</strong><span class="small">Min. Pause</span></div></div></div>
+<div class="card"><div class="head"><div><h3>✨ Deine Unterstützung</h3><div class="sub">Anpassungen aus dem Elternprofil</div></div></div><div class="ok" style="margin-top:10px" id="supportSummary">Unterstützendes Feedback und Pausen sind aktiv.</div></div></div>
+<div class="card" style="margin-top:14px"><div class="head"><div><h3>Was möchtest du heute machen?</h3><div class="sub">Die wichtigsten Bereiche sind direkt erreichbar.</div></div></div><div class="grid3" style="margin-top:12px">
+<button class="feature btn" onclick="show('learning')"><h4>📚 Nachhilfe starten</h4><div class="small">Mit Hero gemeinsam lernen</div></button>
+<button class="feature btn" onclick="show('groups')"><h4>👥 Lerngruppe</h4><div class="small">Gemeinsam lernen und chatten</div></button>
+<button class="feature btn" onclick="show('games')"><h4>🎮 Spielen & Pause</h4><div class="small">Pausenspiele und Übungen</div></button>
+<button class="feature btn" onclick="show('music')"><h4>🎵 Musik & Instrumente</h4><div class="small">Musik hören und üben</div></button>
+<button class="feature btn" onclick="show('languages')"><h4>🌍 Sprachen</h4><div class="small">Vokabeln, Dialoge und Gebärden</div></button>
+<button class="feature btn" onclick="show('daily')"><h4>🗓️ Mein Tag</h4><div class="small">Bildplan und Tagesstruktur</div></button>
+</div></div><div class="card" style="margin-top:14px"><div class="head"><div><h3>Alle wichtigen Anwendungen</h3><div class="sub">Nichts versteckt – die Bereiche sind direkt erreichbar.</div></div></div><div class="grid3" style="margin-top:12px">
+<div class="feature"><h4>🤖 KI-Nachhilfe</h4><div class="small">Dialogisch, schuljahres- und schulstoffbezogen.</div></div><div class="feature"><h4>🖼️ Visualisierung</h4><div class="small">Bildhafte Tagesabläufe für selbstständige Orientierung.</div></div><div class="feature"><h4>🛡️ Kinderschutz</h4><div class="small">Altersgerechte Kommunikation und Moderation.</div></div>
+</div></div></section>
+
+<section id="learning" class="page"><div class="grid">
+<div class="card"><div class="head"><div><h3>🧠 Lernmodus</h3><div class="sub">Passend zu Klasse, Schuljahr und Lernstand.</div></div></div><label>Fach</label><select id="subject"><option>Mathematik</option><option>Deutsch</option><option>Sachkunde</option><option>Englisch</option><option>Weitere Fächer</option></select><label>Schulstoff / Thema</label><input id="topic" placeholder="z. B. Brüche, Rechtschreibung ..."><div class="actions"><button class="btn primary" onclick="learn()">🚀 Gemeinsam lernen</button><button class="btn soft" onclick="addStar()">⭐ Lernschritt geschafft</button></div><div id="learnResult" class="ok" style="margin-top:10px">Hero wartet auf dein Thema.</div></div>
+<div class="card"><div class="head"><div><h3>📝 Diktat</h3><div class="sub">Langsames Vorlesetempo für Kinder.</div></div><span class="pill">Wort für Wort</span></div><select id="grade"><option>1. Klasse – 1. Halbjahr</option><option>1. Klasse – 2. Halbjahr</option><option>2. Klasse – 1. Halbjahr</option><option>2. Klasse – 2. Halbjahr</option><option>3. Klasse – 1. Halbjahr</option><option>3. Klasse – 2. Halbjahr</option><option>4. Klasse – 1. Halbjahr</option><option>4. Klasse – 2. Halbjahr</option><option>5. Klasse – 1. Halbjahr</option><option>5. Klasse – 2. Halbjahr</option><option>6. Klasse – 1. Halbjahr</option><option>6. Klasse – 2. Halbjahr</option><option>7. Klasse – 1. Halbjahr</option><option>7. Klasse – 2. Halbjahr</option><option>8. Klasse – 1. Halbjahr</option><option>8. Klasse – 2. Halbjahr</option><option>9. Klasse – 1. Halbjahr</option><option>9. Klasse – 2. Halbjahr</option><option>10. Klasse – 1. Halbjahr</option><option>10. Klasse – 2. Halbjahr</option><option>11. Klasse – 1. Halbjahr</option><option>11. Klasse – 2. Halbjahr</option><option>12. Klasse – 1. Halbjahr</option><option>12. Klasse – 2. Halbjahr</option><option>13. Klasse – 1. Halbjahr</option><option>13. Klasse – 2. Halbjahr</option></select><div id="dictationText" class="item">Wähle die Klassenstufe und starte das Diktat.</div><button class="btn primary" onclick="dictation()">🔊 Diktat vorlesen</button><button class="btn soft" onclick="speechSynthesis.cancel()">⏹️ Stoppen</button><div class="grid" style="margin-top:10px"><div><label>Sprechtempo</label><input id="dictSpeed" type="range" min="0.75" max="1.15" step="0.05" value="0.95"></div><div><label>Pause nach jedem Wort (Sek.)</label><input id="dictPause" type="number" min="0.15" max="2" step="0.05" value="0.35"></div></div></div></div>
+<div class="card" style="margin-top:14px"><h3>🎧 Konzentration & Pause</h3><div class="grid3"><button class="feature btn" onclick="focusMusic()">🎧 Konzentrationsmusik</button><button class="feature btn" onclick="pauseGame('Wer oder was bin ich?')">🎮 Wer oder was bin ich?</button><button class="feature btn" onclick="pauseGame('Stadt, Land, Fluss')">🌍 Stadt, Land, Fluss</button><button class="feature btn" onclick="pauseGame('Schach')">♟️ Schach</button><button class="feature btn" onclick="pauseGame('Mühle')">⚫ Mühle</button><button class="feature btn" onclick="pauseGame('Mensch ärgere dich nicht')">🎲 Mensch ärgere dich nicht</button></div><div id="pauseResult" class="ok" style="margin-top:10px">Pausen können an die Eltern-Einstellungen angepasst werden.</div></div></section>
+
+<section id="games" class="page"><div class="card"><div class="head"><div><h3>🎮 Spiele & Pause</h3><div class="sub">Kleine lokale Browser-Spiele zum direkten Spielen.</div></div><span class="pill">Pausenbereich</span></div><div class="grid3" style="margin-top:12px">
+<button class="feature btn" onclick="startGame('Memory')">🧠 Memory</button>
+<button class="feature btn" onclick="startGame('Reaktionsspiel')">⚡ Reaktion</button>
+<button class="feature btn" onclick="startGame('Zahlenblitz')">🔢 Zahlenblitz</button>
+<button class="feature btn" onclick="startGame('Wortduell')">🔤 Wortduell</button>
+<button class="feature btn" onclick="startGame('Wer oder was bin ich?')">❓ Wer oder was bin ich?</button>
+<button class="feature btn" onclick="startGame('Stadt, Land, Fluss')">🌍 Stadt, Land, Fluss</button>
+</div><div id="gameResult" class="ok" style="margin-top:12px">Wähle ein Spiel.</div></div></section>
+<section id="music" class="page"><div class="grid"><div class="card"><div class="head"><div><h3>🎵 Musik</h3><div class="sub">Musik auswählen und direkt abspielen.</div></div></div><label>Musik auswählen</label><select id="musicChoice"><option value="focus">🎧 Konzentration</option><option value="alpha">🌿 Ruhig</option><option value="pause">☀️ Pause</option><option value="nature">🌙 Entspannung</option></select><div class="actions"><button class="btn primary" onclick="playSelectedMusic()">▶️ Abspielen</button><button class="btn soft" onclick="stopMusic()">⏹️ Stoppen</button></div><div id="musicResult" class="ok" style="margin-top:10px">Keine Musik aktiv.</div></div>
+<div class="card"><h3>🎹 Musikinstrumente üben</h3><div class="sub">Erste Übungen direkt im Browser.</div><label>Instrument</label><select id="instrumentChoice"><option>Klavier</option><option>Gitarre</option><option>Keyboard</option><option>Ukulele</option><option>Schlagzeug</option></select><label>Übung</label><select id="instrumentExercise"><option>Noten erkennen</option><option>Rhythmus üben</option><option>Töne hören</option><option>Griff-/Tastenübung</option></select><button class="btn primary" onclick="startInstrument()">🎼 Übung starten</button><div id="instrumentResult" class="ok" style="margin-top:10px">Wähle Instrument und Übung.</div></div></div></section>
+<section id="assistant" class="page"><div class="card"><div class="head"><div><h3>🗣️ Hero spricht</h3><div class="sub">Sprachassistent für Fragen zu Terminen, Lernen und Tagesplan.</div></div><span class="pill">Schulkontext</span></div><input id="ask" placeholder="z. B. Was habe ich morgen?"><div class="actions"><button class="btn primary" onclick="startVoiceInput()">🎙️ Mikrofon</button><button class="btn primary" onclick="askHero()">Frage auswerten</button><button class="btn soft" onclick="speak()">🔊 Antwort vorlesen</button></div><div id="answer" class="ok" style="margin-top:10px">Du kannst Hero auch später mit echter Sprach-/KI-Infrastruktur verbinden.</div></div></section>
+
+<section id="languages" class="page"><div class="grid">
+<div class="card"><h3>🌍 Fremdsprachen lernen</h3><div class="sub">Die Sprache wird passend zum zentralen Schulprofil, Schulsystem, Klasse und Halbjahr gelernt.</div><label>Sprache</label><select id="lang"><option>Englisch</option><option>Französisch</option><option>Spanisch</option><option>Italienisch</option><option>Latein</option><option>Griechisch</option><option>Portugiesisch</option><option>Niederländisch</option><option>Dänisch</option><option>Schwedisch</option><option>Norwegisch</option><option>Finnisch</option><option>Isländisch</option><option>Polnisch</option><option>Tschechisch</option><option>Slowakisch</option><option>Slowenisch</option><option>Kroatisch</option><option>Serbisch</option><option>Bosnisch</option><option>Rumänisch</option><option>Ungarisch</option><option>Bulgarisch</option><option>Russisch</option><option>Ukrainisch</option><option>Türkisch</option><option>Arabisch</option><option>Hebräisch</option><option>Persisch</option><option>Hindi</option><option>Urdu</option><option>Bengalisch</option><option>Punjabi</option><option>Tamil</option><option>Telugu</option><option>Marathi</option><option>Gujarati</option><option>Chinesisch (Mandarin)</option><option>Kantonesisch</option><option>Japanisch</option><option>Koreanisch</option><option>Vietnamesisch</option><option>Thai</option><option>Indonesisch</option><option>Malaiisch</option><option>Tagalog</option><option>Swahili</option><option>Amharisch</option><option>Zulu</option><option>Afrikaans</option><option>Deutsch als Zweitsprache</option><option>Weitere Sprache</option></select><input id="customLang" placeholder="Falls nötig: weitere Sprache"><div class="item" style="margin-top:10px">🏫 Schulkontext: <span id="langSchoolContext">wird aus den App-Grundeinstellungen übernommen</span></div><div class="actions"><button class="btn primary" onclick="startLanguage()">🌍 Sprache lernen</button><button class="btn soft" onclick="dialog()">🗣️ Dialog führen</button></div><div id="langResult" class="ok" style="margin-top:10px"></div></div>
+<div class="card"><h3>📚 Vokabeln lernen</h3><div class="sub">Vokabeltraining ist ein eigener Bereich. Klasse und Halbjahr werden immer mit dem Schulsystem verknüpft.</div><div class="grid">
+<div><label>Schulsystem</label><select id="vocabSystem"><option>Gymnasium</option><option>Realschule</option><option>Hauptschule</option><option>Werkrealschule</option><option>Gesamtschule</option><option>Gemeinschaftsschule</option><option>Förderschule / Sonderschule</option><option>Grundschule</option><option>Internationales Schulsystem</option></select></div>
+<div><label>Klasse</label><select id="vocabGrade"></select></div>
+<div><label>Halbjahr</label><select id="vocabHalf"><option>1. Halbjahr</option><option>2. Halbjahr</option></select></div>
+<div><label>Vokabel</label><input id="word" placeholder="z. B. school"></div></div><div class="actions"><button class="btn primary" onclick="vocab()">📖 Vokabeln üben</button></div><div id="vocabContext" class="small" style="margin-top:8px"></div><div id="vocabResult" class="ok" style="margin-top:10px"></div></div>
+<div class="card"><h3>🤟 Gebärden lernen</h3><div class="sub">Gebärdensprache gehört direkt zum Bereich Sprachen lernen und kann unabhängig von Lautsprache gelernt werden.</div><label>Gebärdensprache</label><select id="signLanguage"><option>Deutsche Gebärdensprache (DGS)</option><option>American Sign Language (ASL)</option><option>British Sign Language (BSL)</option><option>Langue des signes française (LSF)</option><option>Österreichische Gebärdensprache (ÖGS)</option><option>Deutschschweizer Gebärdensprache (DSGS)</option><option>Lingua dei Segni Italiana (LIS)</option><option>Lengua de Signos Española (LSE)</option><option>International Sign</option><option>Weitere Gebärdensprache</option></select><label>Thema</label><select id="signTopic"><option>Begrüßung</option><option>Schule</option><option>Familie</option><option>Essen</option><option>Gefühle</option><option>Bedürfnisse</option><option>Alltag</option></select><div class="actions"><button class="btn primary" onclick="sign()">🤟 Gebärden üben</button><button class="btn soft" onclick="cards()">🖼️ Bild-/Kommunikationskarten</button></div><div id="signResult" class="ok" style="margin-top:10px"></div></div></div></section>
+
+<section id="support" class="page"><div class="card"><div class="head"><div><h3>🧩 Förderprogramm</h3><div class="sub">Begleitende Förderung – kein Ersatz für Fachkräfte.</div></div><span class="pill">Individuell</span></div><div class="grid3" style="margin-top:12px">
+<div class="feature"><h4>🗣️ Logopädie-Begleiter</h4><div class="small">Sprach-, Aussprache-, Wortschatz- und Dialogübungen.</div><button class="btn soft" onclick="supportStart('Logopädie')">Starten</button></div>
+<div class="feature"><h4>👐 Ergo-Begleiter</h4><div class="small">Motorik, Koordination, Wahrnehmung und alltagsnahe Übungen.</div><button class="btn soft" onclick="supportStart('Ergo')">Starten</button></div>
+<div class="feature"><h4>🧠 Aufmerksamkeit & Selbstregulation</h4><div class="small">ADHS-nahe Konzentrations-, Struktur- und Verhaltenstrainings als begleitende Übungen.</div><button class="btn soft" onclick="supportStart('Aufmerksamkeit')">Starten</button></div>
+<div class="feature"><h4>👁️ Wahrnehmung</h4><div class="small">Visuelle, auditive und körperbezogene Wahrnehmungsaufgaben.</div><button class="btn soft" onclick="supportStart('Wahrnehmung')">Starten</button></div>
+<div class="feature"><h4>🧩 ASS-Unterstützung</h4><div class="small">Struktur, Vorhersehbarkeit, Kommunikation und visuelle Hilfen.</div><button class="btn soft" onclick="supportStart('ASS')">Starten</button></div>
+<div class="feature"><h4>📖 LRS-Unterstützung</h4><div class="small">Lesen, Laut-Buchstaben-Zuordnung und Rechtschreibung.</div><button class="btn soft" onclick="supportStart('LRS')">Starten</button></div>
+<div class="feature"><h4>🧠 Verhalten & Selbstregulation</h4><div class="small">Begleitende Übungen zu Gefühlen, Impulskontrolle, Übergängen und Alltag – kein Therapieersatz.</div><button class="btn soft" onclick="supportStart('Verhalten & Selbstregulation')">Starten</button></div>
+<div class="feature"><h4>🎯 Exekutive Funktionen</h4><div class="small">Planen, Aufgabenstart, Arbeitsgedächtnis, Zeitgefühl und Wechsel.</div><button class="btn soft" onclick="supportStart('Exekutive Funktionen')">Starten</button></div>
+</div><div id="supportResult" class="ok" style="margin-top:12px">Wähle einen Förderbereich.</div></div></section>
+
+<section id="preschool" class="page"><div class="grid"><div class="card"><h3>🧸 Vorschulprogramm</h3><div class="sub">Spielerische Vorbereitung auf die Schule.</div><div class="grid3" style="margin-top:12px"><div class="feature">🔢 Zahlen & Mengen</div><div class="feature">🔤 Sprache & Laute</div><div class="feature">🎨 Farben & Formen</div><div class="feature">🧩 Konzentration</div><div class="feature">✋ Feinmotorik</div><div class="feature">👂 Zuhören & Verstehen</div></div><button class="btn primary" onclick="preschool()">🧸 Vorschulübung starten</button><div id="preResult" class="ok" style="margin-top:10px"></div></div></div></section>
+
+<section id="daily" class="page" data-roles="child,parent"><div class="grid"><div class="card"><div class="head"><div><h3>🖼️ Mein Bild-Tagesplan</h3><div class="sub">Visuelle Reihenfolge für Kinder, die von Bildern und klaren Abläufen profitieren.</div></div><span class="pill">Eltern können bearbeiten</span></div><div id="schedule" class="schedule" style="margin-top:10px"></div><div class="actions"><button class="btn soft" onclick="addStep()">＋ Schritt</button><button class="btn primary" onclick="resetSchedule()">↺ Zurücksetzen</button></div></div>
+<div class="card"><h3>👨‍👩‍👧 Tagesplan erstellen</h3><div class="sub">Beispiele: Zähne putzen, anziehen, Frühstück, Tasche, Bus, Schule.</div><input id="newStep" placeholder="Neuer Schritt"><input id="newIcon" placeholder="Bildsymbol, z. B. 🪥"><input id="stepPhoto" type="file" accept="image/*"><button class="btn primary" onclick="addCustomStep()">🖼️ In Tagesplan übernehmen</button><div class="note" style="margin-top:10px">Eltern können hier eine Reihenfolge aus Symbolen erstellen; eigene Bilder können ausgewählt werden.</div></div></div></section>
+
+<section id="appsettings" class="page" data-roles="all">
+<div class="role-help"><b>Einmal hier einstellen:</b> Land → Region → Schulsystem → Klasse → Halbjahr. Diese Auswahl wird in Lernen, Vokabeln, Diktat, Ferien und Sprachen verwendet.</div>
+<div class="card"><div class="head"><div><h3>⚙️ App-Grundeinstellungen</h3><div class="sub">Hier wird einmal zentral festgelegt, welches Land, welche Region und welches Schulsystem für die gesamte App gilt.</div></div><span class="pill">Zentrale Einstellung</span></div>
+<div class="grid" style="margin-top:12px">
+<div><label>🌍 Land</label><select id="appCountry"><option>Deutschland</option><option>Österreich</option><option>Schweiz</option></select></div>
+<div><label>📍 Region / Bundesland / Kanton / Bundesstaat</label><select id="appRegion"><option>Region auswählen</option><option>Baden-Württemberg</option><option>Bayern</option><option>Berlin</option><option>Nordrhein-Westfalen</option><option>Österreich – Bundesland auswählen</option><option>Schweiz – Kanton auswählen</option><option>Weitere Region</option></select></div>
+<div><label>🏫 Schulsystem</label><select id="appSystem"><option>Gymnasium</option><option>Realschule</option><option>Hauptschule</option><option>Werkrealschule</option><option>Gesamtschule</option><option>Gemeinschaftsschule</option><option>Förderschule / Sonderschule</option><option>Grundschule</option><option>Berufsschule</option><option>Internationales Schulsystem</option><option>Weitere</option></select></div>
+<div><label>🎓 Klasse</label><select id="appGrade"></select></div>
+<div><label>📚 Halbjahr</label><select id="appHalf"><option>1. Halbjahr</option><option>2. Halbjahr</option></select></div>
+<div><label>📆 Schuljahr</label><input id="appYear" value="2026/27"></div>
+</div>
+<div class="actions"><button class="btn primary" onclick="saveAppSettings()">💾 App-Einstellungen speichern</button></div><div id="appSettingsStatus" class="ok" style="margin-top:10px">Noch nicht gespeichert.</div></div>
+</section>
+
+<section id="profiles" class="page" data-roles="all">
+<div class="card">
+  <div class="head"><div><h3>👤 Profil</h3><div class="sub">Nur das einstellen, was für die angemeldete Person wichtig ist.</div></div><span class="pill">Aktiv: <span id="activeName">Kind</span></span></div>
+
+  <div class="role-help"><b>Wer ist angemeldet?</b><div class="small">Hero Pro zeigt automatisch nur die passenden Bereiche.</div></div>
+  <div class="grid3" style="margin-top:12px">
+    <button class="profile" onclick="setRole('child')"><div class="avatar">🧒</div><b>Kind</b><div class="small">Lernen & Tagesplan</div></button>
+    <button class="profile" onclick="setRole('parent')"><div class="avatar">👨‍👩‍👧</div><b>Eltern</b><div class="small">Kinder & Einstellungen</div></button>
+    <button class="profile" onclick="setRole('teacher')"><div class="avatar">👩‍🏫</div><b>Lehrkraft</b><div class="small">Schule & Elternkontakt</div></button>
+  </div>
+  <div id="roleStatus" class="ok" style="margin-top:10px">Angemeldet als: Kind</div>
+
+  <div class="card" style="margin-top:14px;background:#f8fbfa">
+    <h4>🪪 Mein Name</h4>
+    <div class="row"><input id="accountName" placeholder="Vor- und Nachname"><button class="btn primary" onclick="saveAccountName()">Speichern</button></div>
+    <div id="profileStatus" class="ok" style="margin-top:10px">Name und Kinderprofile werden auf diesem Gerät gespeichert.</div>
+  </div>
+
+  <div class="card" style="margin-top:14px;background:#f8fbfa">
+    <h4>👧 Kinder</h4>
+    <div id="profilesList" class="profile-grid"></div>
+    <div class="row" style="margin-top:10px"><input id="newChildName" placeholder="Name des Kindes"><button class="btn primary" onclick="addChildProfile()">＋ Kind anlegen</button></div>
+    <div class="small" style="margin-top:8px">Tippe auf ein Kinderprofil, um es als aktives Kind auszuwählen.</div>
+  </div>
+
+  <div class="actions" style="margin-top:12px">
+    <button class="btn primary" onclick="openParentControls()">⚙️ Elternsteuerung</button>
+    <button class="btn soft" onclick="show('appsettings')">🌍 Land & Schule</button>
+  </div>
+</div>
+
+<div id="parent" class="card" data-roles="parent" style="margin-top:14px">
+  <div class="head"><div><h3>⚙️ Elternsteuerung</h3><div class="sub">Alle Einstellungen für das ausgewählte Kind an einem Ort.</div></div><span class="pill">Nur Eltern</span></div>
+  <div class="grid">
+    <div>
+      <h4>🧩 Unterstützung</h4>
+      <label><input id="cAdhd" type="checkbox"> ADHS-Unterstützung</label>
+      <label><input id="cAss" type="checkbox"> ASS-Unterstützung</label>
+      <label><input id="cLrs" type="checkbox"> LRS-Unterstützung</label>
+      <label><input id="cReward" type="checkbox"> Belohnungssystem</label>
+      <label><input id="cSupport" type="checkbox"> Unterstützendes Feedback</label>
+      <label><input id="cBreaks" type="checkbox"> Automatische Pausen</label>
+      <label><input id="cVoice" type="checkbox"> Sprachunterstützung</label>
+      <label><input id="cVisual" type="checkbox"> Bildhafte Unterstützung</label>
+    </div>
+    <div>
+      <h4>⭐ Belohnung & Zeit</h4>
+      <label>Sterne bis Belohnung</label><input id="cGoal" type="number" min="1" value="5">
+      <label>Belohnungsdauer (Minuten)</label><input id="cRewardMin" type="number" min="1" value="30">
+      <label>Medienzeit täglich (Minuten)</label><input id="cMedia" type="number" min="0" value="30">
+      <label>Spielezeit täglich (Minuten)</label><input id="cGames" type="number" min="0" value="30">
+      <label>Medien frei von / bis</label><div class="row"><input id="mediaFrom" type="time" value="15:00"><input id="mediaTo" type="time" value="19:00"></div>
+      <label>Spiele frei von / bis</label><div class="row"><input id="gamesFrom" type="time" value="16:00"><input id="gamesTo" type="time" value="18:00"></div>
+      <label>Schulmodus von / bis</label><div class="row"><input id="schoolFrom" type="time" value="08:00"><input id="schoolTo" type="time" value="13:00"></div>
+      <label>Belohnung nach</label><select id="rewardTrigger"><option>Lernziel erreicht</option><option>Hausaufgabe erledigt</option><option>Tagesplan abgeschlossen</option><option>Kombiniert</option></select>
+    </div>
+  </div>
+  <div class="actions"><button class="btn primary" onclick="saveParent()">💾 Für dieses Kind speichern</button></div>
+  <div id="parentStatus" class="ok" style="margin-top:10px">Bereit.</div>
+</div>
+</section>
+
+<section id="family" class="page" data-roles="parent"><div class="grid"><div class="card"><h3>📵 Schulmodus</h3><div class="sub">Eltern können das Zeitfenster festlegen. Eine echte geräteweite Sperre benötigt später eine Geräteverwaltungs-/Betriebssystem-Anbindung.</div><div class="row"><input id="sf" type="time" value="08:00"><input id="st" type="time" value="13:00"></div><button class="btn primary" onclick="schoolMode()">📵 Speichern & aktivieren</button><div id="schoolStatus" class="ok" style="margin-top:10px"></div></div>
+<div class="card"><h3>📍 GPS / Live-Standort</h3><div class="sub">Elternfreigabe, Standortprüfung und später echte Live-Ortung über Geräte-/Backend-Dienste.</div><label><input id="gpsConsent" type="checkbox"> Standortfreigabe</label><button class="btn primary" onclick="gps()">📍 Standort prüfen</button><div id="gpsStatus" class="ok" style="margin-top:10px">Nicht aktiviert.</div></div>
+<div class="card"><h3>🏆 Belohnung</h3><div class="sub">Aktuelle Einstellung aus dem Elternprofil.</div><div class="stat"><strong id="rewardView">5 ⭐</strong><span class="small">bis zur Belohnung</span></div></div></div></section>
+
+<section id="school" class="page" data-roles="parent,teacher"><div class="grid"><div class="card"><h3>🏫 Schulprofil</h3><div class="sub">Schulstoff, Schuljahr und Ferien sollen immer zum tatsächlichen Bildungssystem passen.</div><select><option>Deutschland</option><option>Österreich</option><option>Schweiz</option><option>Weitere Länder</option></select><select><option>Bundesland / Region auswählen</option><option>Nordrhein-Westfalen</option><option>Bayern</option><option>Berlin</option><option>Hamburg</option><option>Sachsen</option><option>Weitere</option></select><select><option>Gymnasium</option><option>Realschule</option><option>Hauptschule</option><option>Werkrealschule</option><option>Gesamtschule</option><option>Gemeinschaftsschule</option><option>Förderschule / Sonderschule</option><option>Grundschule</option><option>Weitere</option></select><div class="row"><select id="schoolGrade"></select><select id="schoolHalf"><option>1. Halbjahr</option><option>2. Halbjahr</option></select><input id="schoolYear" value="2026/27" placeholder="Schuljahr"></div><button class="btn primary" onclick="saveSchool()">🏫 Schulprofil speichern</button><div id="schoolProfileStatus" class="ok" style="margin-top:10px">Schulprofil bereit.</div></div>
+<div class="card"><h3>📚 Schule organisieren</h3><input placeholder="Fach / Stunde"><input placeholder="Hausaufgabe"><input placeholder="Umfrage"><button class="btn primary" onclick="schoolSave()">＋ Speichern</button><div class="grid3" style="margin-top:10px">
+<div class="feature"><h4>📅 Stundenplan</h4><div class="small">Stunden anlegen und synchronisieren.</div><button class="btn soft" onclick="schoolModule('Stundenplan')">Öffnen</button></div>
+<div class="feature"><h4>📚 Hausaufgaben</h4><div class="small">Aufgaben und Fälligkeiten verwalten.</div><button class="btn soft" onclick="schoolModule('Hausaufgaben')">Öffnen</button></div>
+<div class="feature"><h4>📊 Umfragen</h4><div class="small">Umfragen erstellen und beantworten.</div><button class="btn soft" onclick="schoolModule('Umfragen')">Öffnen</button></div>
+<div class="feature"><h4>📢 Schulnachrichten</h4><div class="small">Schulische Mitteilungen.</div><button class="btn soft" onclick="schoolModule('Schulnachrichten')">Öffnen</button></div>
+<div class="feature"><h4>👩‍🏫 Lehrkraft</h4><div class="small">Eigener schulischer Bereich.</div><button class="btn soft" onclick="schoolModule('Lehrkraft')">Öffnen</button></div>
+<div class="feature"><h4>🍽️ Mensa</h4><div class="small">Essensplan über offizielle Schnittstelle.</div><button class="btn soft" onclick="schoolModule('Mensa')">Öffnen</button></div>
+</div><div id="schoolModuleResult" class="ok" style="margin-top:10px">Wähle einen Schulbereich.</div></div></div></section>
+
+<section id="groups" class="page" data-roles="child,parent,teacher"><div class="grid"><div class="card"><div class="head"><div><h3>👥 Lerngruppen</h3><div class="sub">Lernen gemeinsam – Text, Audio und Video gehören hierher.</div></div><span class="pill">Geschützt</span></div><input id="groupName" placeholder="Name der Lerngruppe"><button class="btn primary" onclick="createGroup()">＋ Lerngruppe erstellen</button><div id="groupList" class="list" style="margin-top:10px"></div></div>
+<div class="card"><h3>💬 Gruppenchat</h3><div id="chat" class="chat"><div class="bubble">Willkommen in der Lerngruppe.</div></div><div class="row"><input id="chatInput" placeholder="Nachricht"><button class="btn primary" onclick="sendChat()">Senden</button></div><div class="actions"><button class="btn soft" onclick="voice()">🎤 Sprachnachricht</button><button class="btn soft" onclick="video()">📹 Videoanruf</button><button class="btn soft" onclick="groupVideo()">👥 Gruppen-Video</button><button class="btn soft" onclick="groupPic()">📷 Gruppenbild</button></div><div id="mediaStatus" class="ok" style="margin-top:10px">Medienfunktionen werden in der echten Version über sichere Echtzeitdienste umgesetzt.</div></div></div>
+</section>
+
+<section id="classroom" class="page" data-roles="parent,teacher">
+<div class="grid">
+<div class="card"><div class="head"><div><h3>🏫 Klassenraum</h3><div class="sub">Getrennt von den Kinder-Lerngruppen. Dieser Bereich ist für Eltern und Lehrkräfte vorgesehen.</div></div><span class="pill">Eltern · Lehrkraft</span></div>
+<div class="grid3" style="margin-top:12px">
+<div class="feature"><h4>👧👦 Klassenkameraden</h4><div class="small">Nur freigegebene schulische Kontakte.</div><button class="btn soft" onclick="classModule('Klassenkameraden')">Öffnen</button></div>
+<div class="feature"><h4>💶 Klassenkasse</h4><div class="small">Verwalten, Einzahlungen und Ausgaben dokumentieren.</div><button class="btn soft" onclick="classModule('Klassenkasse')">Öffnen</button></div>
+<div class="feature"><h4>📅 Stundenplan</h4><div class="small">Stundenplan ansehen; Lehrkräfte können Änderungen bei Ausfall eintragen.</div><button class="btn soft" onclick="classModule('Stundenplan')">Öffnen</button></div>
+<div class="feature"><h4>📢 Schulmitteilungen</h4><div class="small">Wichtige Informationen der Schule.</div><button class="btn soft" onclick="classModule('Schulmitteilungen')">Öffnen</button></div>
+</div><div id="classModuleResult" class="ok" style="margin-top:10px">Wähle einen Bereich.</div></div>
+
+</div></div></section>
+
+<section id="messages" class="page" data-roles="parent,teacher"><div class="card"><h3>💬 Direkte Nachrichten</h3><div class="sub">Separat von Lerngruppen: Eltern, Lehrkräfte und ausdrücklich freigegebene Kontakte.</div><div class="row"><input id="to" placeholder="An"><input id="msg" placeholder="Nachricht"></div><button class="btn primary" onclick="directMsg()">✉️ Senden</button><div id="directResult" class="ok" style="margin-top:10px"></div></div></section>
+
+<section id="safety" class="page" data-roles="parent,teacher"><div class="grid"><div class="card"><h3>🛡️ Anti-Mobbing</h3><div class="sub">Meldung, Schutz und Moderation sind Teil der Kommunikationsarchitektur.</div><div class="list"><div class="item">⚠️ Lästereien über nicht anwesende Personen erkennen → Warnung</div><div class="item">🛑 Bei Fortsetzung → Chat stoppen</div><div class="item">❓ Betroffenes Kind fragen, ob es Mobbing ist</div><div class="item">🔒 Bei bestätigtem Mobbing → Täterkonto/Kommunikation sperren nach den festgelegten Regeln</div><div class="item">📋 Moderationsfall mit Originaltext/Screenshot/Verlauf für die zuständige Schutzinstanz sichern; nicht blind Beweise löschen</div><div class="item">🔞 Alters- und sexualisierte Inhalte → Warnung, Schutzmaßnahmen und Moderation</div></div></div>
+<div class="card"><h3>🔐 Rollen & Freigaben</h3><div class="list"><div class="item">👨‍👩‍👧 Eltern: Steuerung und Freigaben</div><div class="item">🧒 Kind: altersgerechte Funktionen</div><div class="item">👩‍🏫 Lehrkraft: schulischer Bereich</div><div class="item">🏫 Schule: kostenloser Basistarif möglich</div></div><div class="note" style="margin-top:10px">Die endgültige Umsetzung braucht sichere Authentifizierung, Moderation, Datenschutz und gesetzeskonforme Aufbewahrungs-/Löschregeln.</div></div></div></section>
+
+<section id="integrations" class="page" data-roles="parent,teacher"><div class="grid"><div class="card"><h3>🔗 App-Kopplungen</h3><div class="sub">Hero Pro soll mit wichtigen Apps und Diensten zusammenarbeiten, sofern eine offizielle Schnittstelle oder Gerätefreigabe existiert.</div><div class="list"><div class="item">🍽️ Mensa / Schulessen – Speiseplan, Bestellung/Abholung je nach API</div><div class="item">📅 Handy-Kalender – Termine synchronisieren</div><div class="item">🏫 Schulplattformen – Stundenplan, Aufgaben, Nachrichten</div><div class="item">📚 Lernplattformen – Lerninhalte/Status</div><div class="item">🔔 Benachrichtigungen / Push</div>
+<div class="item">📆 Handy-Kalender – Synchronisierung mit Berechtigung</div>
+<div class="item">🏫 Schulplattformen – Stundenplan, Aufgaben, Nachrichten</div>
+<div class="item">🍽️ Mensa-Apps – Speiseplan/Bestellung, sofern offizielle API</div>
+<div class="item">📚 Weitere Lern- und Schulapps über offizielle Schnittstellen</div></div></div>
+
+<div class="card"><h3>📱 Android-Geräteschnittstelle</h3>
+<div class="sub">Für echte App-/Medien-Sperren wird später eine native, berechtigte Geräteverwaltung benötigt.</div>
+<div class="list">
+<div class="item">🔐 Eltern geben die Geräteverwaltung ausdrücklich frei.</div>
+<div class="item">⭐ Sternziel wird in Hero Pro geprüft.</div>
+<div class="item">🔓 Freigabe wird zeitlich begrenzt erteilt.</div>
+<div class="item">🔒 Nach Ablauf wird die Sperre wieder hergestellt.</div>
+</div>
+<div class="note" style="margin-top:10px">Die Web-App kann diese systemweite Sperre nicht selbst erzwingen; sie stellt die sichere Schnittstellenstruktur und den Freigabezustand bereit.</div>
+</div>
+<div class="card"><h3>🌍 Weltweite Nutzung</h3><div class="sub">Land, Region, Schulform, Schuljahr, Ferien, Sprache und Curriculum werden als Konfiguration behandelt.</div><div class="grid3"><div class="feature">🌎 Länder</div><div class="feature">🏫 Schulsysteme</div><div class="feature">📅 Ferien</div></div><div class="note" style="margin-top:10px">Echte Datenquellen und APIs werden pro Land/Anbieter angeschlossen.</div></div></div></section>
+
+<section id="googleConnect" class="page">
+  <div class="card">
+    <div class="head">
+      <div><h2>🔐 Google / Gemini verbinden</h2>
+      <div class="sub">Hero Pro baut keine eigene KI. Eine Verbindung zu Google/Gemini darf nur nach deiner ausdrücklichen Zustimmung hergestellt werden.</div></div>
+      <span class="pill">Einwilligung erforderlich</span>
+    </div>
+    <div class="item" style="margin-top:12px">
+      <label><input id="googleConsent" type="checkbox">
+      Ich möchte Hero Pro erlauben, die für Google/Gemini freigegebenen Funktionen zu verwenden.</label>
+    </div>
+    <div class="actions" style="margin-top:12px">
+      <button class="btn primary" onclick="requestGoogleConnection()">🔗 Google-Verbindung vorbereiten</button>
+      <button class="btn soft" onclick="revokeGoogleConnection()">✖ Verbindung widerrufen</button>
+    </div>
+    <div id="googleStatus" class="ok" style="margin-top:10px">Noch keine Google-/Gemini-Freigabe erteilt.</div>
+    <div class="note" style="margin-top:10px">
+      Die tatsächliche Google-OAuth-/Gemini-Autorisierung wird über die offizielle Google-Schnittstelle angeschlossen; diese HTML-Version speichert keine Google-Zugangsdaten.
+    </div>
+  </div>
+</section>
+
+<section id="rewards" class="page" data-roles="parent">
+  <div class="card">
+    <div class="head">
+      <div><h2>⭐ Aufgaben & Belohnungen</h2>
+      <div class="sub">Sterne funktionieren unabhängig davon, ob digitale Medien genutzt werden.</div></div>
+      <span class="pill">Elternsteuerung</span>
+    </div>
+
+    <div class="grid">
+      <div>
+        <label>Belohnungsmodus</label>
+        <select id="rewardMode">
+          <option value="stars">⭐ Nur Sterne</option>
+          <option value="custom">⭐ Sterne + eigene Belohnung</option>
+          <option value="digital">⭐ Sterne + digitale Freigabe</option>
+          <option value="both">⭐ Sterne + eigene und digitale Belohnung</option>
+        </select>
+      </div>
+      <div>
+        <label>Sterne bis zum Ziel</label>
+        <input id="rewardGoal" type="number" min="1" max="100" value="5">
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:12px">
+      <div>
+        <label>Optionale eigene Belohnung</label>
+        <input id="customReward" placeholder="z. B. Wunschessen, Ausflug – optional">
+      </div>
+      <div>
+        <label>Digitale App / Kategorie</label>
+        <input id="digitalRewardApp" placeholder="z. B. Minecraft, Roblox">
+      </div>
+      <div>
+        <label>Freigabe-Dauer (Minuten)</label>
+        <input id="digitalRewardMinutes" type="number" min="1" max="240" value="30">
+      </div>
+    </div>
+
+    <div class="actions" style="margin-top:12px">
+      <button class="btn primary" onclick="saveRewardSettings()">💾 Belohnung speichern</button>
+      <button class="btn soft" onclick="resetRewardStars()">↺ Sterne zurücksetzen</button>
+    </div>
+    <div id="rewardSettingsStatus" class="ok" style="margin-top:10px">Bereit.</div>
+
+    <div class="card" style="margin-top:14px">
+      <div class="head"><div><h3>⭐ Aktueller Fortschritt</h3><div class="sub">Sterne können durch erledigte Aufgaben und Lernaktivitäten vergeben werden.</div></div></div>
+      <div style="font-size:30px;font-weight:900" id="rewardStarsDisplay">0 / 5 ⭐</div>
+      <div class="actions">
+        <button class="btn soft" onclick="completeRewardTask('Lernpensum')">📚 Lernpensum erledigt +1 ⭐</button>
+        <button class="btn soft" onclick="completeRewardTask('Hausaufgabe')">📷 Hausaufgabe eingereicht +1 ⭐</button>
+        <button class="btn soft" onclick="completeRewardTask('Diktat')">📝 Diktat erledigt +1 ⭐</button>
+        <button class="btn soft" onclick="completeRewardTask('Vokabeln')">📖 Vokabeln erledigt +1 ⭐</button>
+        <button class="btn soft" onclick="completeRewardTask('Förderung')">🧩 Förderung erledigt +1 ⭐</button>
+        <button class="btn soft" onclick="completeRewardTask('Tagesplan')">🗓️ Tagesplan erledigt +1 ⭐</button>
+      </div>
+      <div id="rewardResult" class="ok" style="margin-top:10px">Noch keine Sterne gesammelt.</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <div class="head"><div><h3>📷 Aufgaben mit Foto</h3><div class="sub">Ein Kind kann ein Ergebnis fotografieren und als erledigt einreichen. Eltern können es bestätigen.</div></div></div>
+    <div class="grid">
+      <div>
+        <label>Aufgabe</label>
+        <input id="taskTitle" placeholder="z. B. Mathe Seite 42 Nr. 1–5">
+      </div>
+      <div>
+        <label>Fach</label>
+        <input id="taskSubject" placeholder="Mathematik">
+      </div>
+    </div>
+    <input id="taskPhoto" type="file" accept="image/*" capture="environment" style="margin-top:10px">
+    <div class="actions">
+      <button class="btn primary" onclick="submitTask()">📤 Als erledigt einreichen</button>
+    </div>
+    <div id="taskStatus" class="ok" style="margin-top:10px">Noch keine Aufgabe eingereicht.</div>
+  </div>
+</section>
+<section id='masterAudit' class='page' data-roles='parent,teacher'><div class='card'><h2>🧭 HeroPro Master-Audit</h2><div class='sub'>Soll-/Ist-Abgleich des aktuellen Builds.</div><div class='list' style='margin-top:12px'>{''.join(items)}</div><div class='note' style='margin-top:12px'>🟢 vorhanden · 🟡 vorbereitet/benötigt externe Schnittstelle · 🔴 fehlt.</div></div></section><section id="selfTest" class="page" data-roles="parent,teacher">
+<div class="card"><div class="head"><div><h2>🧪 Funktions-Selbsttest</h2>
+<div class="sub">Prüft beim Öffnen der App, ob die zentralen lokalen Funktionen und Elemente geladen wurden.</div></div><span class="pill">Test</span></div>
+<button class="btn primary" onclick="heroProSelfTest()" style="margin-top:12px">🧪 Test jetzt ausführen</button>
+<div id="selfTestResult" class="list" style="margin-top:12px"></div></div></section>
+<section id="integrationStatus" class="page" data-roles="parent,teacher">
+  <div class="card">
+    <div class="head">
+      <div><h2>🔗 Hero Pro Schnittstellen</h2>
+      <div class="sub">Alle späteren externen Funktionen haben feste Anschlussstellen. Zugangsdaten werden niemals im Frontend gespeichert.</div></div>
+      <span class="pill">Master</span>
+    </div>
+    <div class="list" style="margin-top:12px">
+      <div class="item">🟢 Google/Gemini — Nutzerzustimmung + OAuth-Anschlussstelle</div>
+      <div class="item">🟢 Cloudflare — geschützte Backend/API-Anschlussstelle</div>
+      <div class="item">🟢 Android — Geräte-/App-Freigabe-Bridge</div>
+      <div class="item">🟢 GPS — Standort-Bridge</div>
+      <div class="item">🟢 ⭐ Belohnung → digitale Freigabe</div>
+      <div class="item">🟢 📷 Aufgaben/Fotos → Aufgaben-/Cloud-Schnittstelle</div>
+      <div class="item">🟢 👥 Lerngruppe/Kommunikation → spätere Echtzeit-Schnittstelle</div>
+      <div class="item">🟢 🔔 Benachrichtigungen → spätere Push-Schnittstelle</div>
+    </div>
+    <div class="note" style="margin-top:12px">
+      Diese Anschlussstellen machen spätere Erweiterungen möglich, ersetzen aber nicht die erforderlichen Google-, Cloudflare- oder Android-Konfigurationen.
+    </div>
+  </div>
+</section>
+</main>
+</div>
+<script>
+const state={
+ role:"child", activeProfile:0,
+ accountName:"",
+ profiles:[{id:"child-1",name:"Kind",role:"Kind",icon:"🧒",settings:{}}],
+ stars:1,lastAnswer:"",
+ steps:[["Aufstehen","🌅"],["Zähne putzen","🪥"],["Anziehen","👕"],["Frühstück","🥣"],["Schultasche","🎒"],["Zum Bus","🚌"],["Schule","🏫"]]
+};
+const defaults={adhd:false,ass:false,lrs:false,reward:true,support:true,breaks:true,goal:5,rewardMin:30,media:30,games:30,mediaFrom:"15:00",mediaTo:"19:00",gamesFrom:"16:00",gamesTo:"18:00",schoolFrom:"08:00",schoolTo:"13:00",rewardTrigger:"Lernziel erreicht",voice:true,visual:true};
+const $=id=>document.getElementById(id);
+function currentChild(){return state.profiles[state.activeProfile]||state.profiles[0];}
+function childSettings(){const p=currentChild();p.settings=Object.assign({},defaults,p.settings||{});return p.settings;}
+function canView(el){
+ const roles=(el.getAttribute("data-roles")||"all").split(",");
+ return roles.includes("all") || roles.includes(state.role);
+}
+function show(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ const el=$(id); if(!el || !canView(el)) return;
+ el.classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ window.scrollTo({top:0,behavior:"smooth"});
+ applyRoleUI();
+}
+function applyRoleUI(){
+ document.querySelectorAll("[data-roles]").forEach(el=>{el.style.display=canView(el)?"":"none";});
+ document.querySelectorAll(".nav button").forEach(b=>{
+   const target=$(b.dataset.page); b.style.display=(target&&canView(target))?"":"none";
+ });
+ $("roleStatus").textContent="Angemeldet als: "+({child:"Kind",parent:"Eltern",teacher:"Lehrkraft"}[state.role]);
+ loadParentForm();
+ renderCore(); renderProfiles();
+}
+function setRole(role){
+ state.role=role;
+ if(role==="child" && state.profiles.length===0) addChildProfile();
+ applyRoleUI();
+ show("home");
+}
+function openParentControls(){
+ if(state.role!=="parent"){alert("Bitte zuerst oben „Eltern“ auswählen.");return;}
+ show("profiles"); setTimeout(()=>document.getElementById("parent")?.scrollIntoView({behavior:"smooth",block:"start"}),50);
+}
+function saveAccountName(){
+ const n=$("accountName").value.trim(); if(!n){alert("Bitte einen Namen eingeben.");return;}
+ state.accountName=n; localStorage.setItem("heroProAccountName",n);
+ $("profileStatus").textContent="✓ Name gespeichert.";
+ renderCore();
+}
+function addChildProfile(){
+ const n=$("newChildName")?.value.trim(); if(!n){alert("Bitte den Namen des Kindes eingeben.");return;}
+ state.profiles.push({id:"child-"+Date.now(),name:n,role:"Kind",icon:"🧒",settings:Object.assign({},defaults)});
+ state.activeProfile=state.profiles.length-1;
+ $("newChildName").value=""; saveState(); renderProfiles(); renderCore();
+ $("profileStatus").textContent="✓ Kinderprofil „"+n+"“ angelegt und ausgewählt.";
+}
+function switchProfile(i){
+ state.activeProfile=i; saveState(); renderProfiles(); renderCore(); loadParentForm();
+ $("profileStatus").textContent="✓ Aktives Kind: "+currentChild().name;
+}
+function editChildProfile(i){
+ const p=state.profiles[i]; if(!p)return;
+ const n=prompt("Name des Kindes:",p.name);
+ if(n===null)return;
+ const clean=n.trim(); if(!clean){alert("Der Name darf nicht leer sein.");return;}
+ p.name=clean; saveState(); renderProfiles(); renderCore();
+ $("profileStatus").textContent="✓ Kinderprofil geändert.";
+}
+function deleteChildProfile(i){
+ if(state.profiles.length<=1){alert("Mindestens ein Kinderprofil muss vorhanden sein.");return;}
+ const p=state.profiles[i]; if(!p)return;
+ if(!confirm("Kinderprofil „"+p.name+"“ wirklich löschen?"))return;
+ state.profiles.splice(i,1);
+ if(state.activeProfile>=state.profiles.length)state.activeProfile=state.profiles.length-1;
+ saveState(); renderProfiles(); renderCore(); loadParentForm();
+ $("profileStatus").textContent="✓ Kinderprofil gelöscht.";
+}
+function renderProfiles(){
+ const box=$("profilesList"); if(!box)return;
+ box.innerHTML=state.profiles.map((p,i)=>`<div class="profile ${i===state.activeProfile?"active":""}">
+   <button class="profile" style="width:100%;border:0;background:transparent;text-align:left" onclick="switchProfile(${i})">
+     <div class="avatar">${p.icon}</div><b>${esc(p.name)}</b><div class="small">Kinderprofil · ${i===state.activeProfile?"aktiv":"auswählen"}</div>
+   </button>
+   <div class="item-actions">
+     <button class="edit-mini" onclick="editChildProfile(${i})">Bearbeiten</button>
+     <button class="delete-mini" onclick="deleteChildProfile(${i})">Löschen</button>
+   </div>
+ </div>`).join("");
+}
+function renderCore(){
+ const st=childSettings(),p=currentChild();
+ $("stars").textContent=state.stars;$("goal").textContent=st.goal;
+ $("heroProgress").style.width=Math.min(100,state.stars/st.goal*100)+"%";
+ $("activeName").textContent=state.role==="child"?p.name:({parent:"Eltern",teacher:"Lehrkraft"}[state.role]);
+ $("profileBadge").textContent=state.role==="child"?p.name:({parent:"Eltern",teacher:"Lehrkraft"}[state.role]);
+ if(state.role==="child"){
+   $("focusTitle").textContent="Individuell";
+   $("focusText").textContent=st.adhd||st.ass||st.lrs?"Unterstützung ist passend eingestellt.":"Unterstützung passend zum Profil";
+ } else if(state.role==="parent"){
+   $("focusTitle").textContent="Elternbereich";$("focusText").textContent="Einstellungen für "+p.name;
+ } else {
+   $("focusTitle").textContent="Schulbereich";$("focusText").textContent="Kommunikation, Stundenplan & Klassenkasse";
+ }
+ $("rewardView").textContent=st.goal+" ⭐";
+ const modes=[];if(st.adhd)modes.push("ADHS");if(st.ass)modes.push("ASS");if(st.lrs)modes.push("LRS");
+ $("supportSummary").textContent=(modes.length?modes.join(" · ")+" · ":"")+(st.support?"Unterstützendes Feedback":"Standardfeedback")+(st.breaks?" · Pausen aktiv.":".");
+ syncLanguageContext();
+}
+function loadParentForm(){
+ const st=childSettings(); const ids={adhd:"cAdhd",ass:"cAss",lrs:"cLrs",reward:"cReward",support:"cSupport",breaks:"cBreaks",voice:"cVoice",visual:"cVisual"};
+ Object.entries(ids).forEach(([k,id])=>{if($(id))$(id).checked=!!st[k];});
+ [["goal", "cGoal"],["rewardMin","cRewardMin"],["media","cMedia"],["games","cGames"]].forEach(([k,id])=>{if($(id))$(id).value=st[k];});
+ [["mediaFrom","mediaFrom"],["mediaTo","mediaTo"],["gamesFrom","gamesFrom"],["gamesTo","gamesTo"],["schoolFrom","schoolFrom"],["schoolTo","schoolTo"],["rewardTrigger","rewardTrigger"]].forEach(([k,id])=>{if($(id))$(id).value=st[k];});
+}
+function saveParent(){
+ if(state.role!=="parent"){alert("Die Elternsteuerung ist nur für Eltern.");return;}
+ const st=childSettings();
+ ["adhd","ass","lrs","reward","support","breaks","voice","visual"].forEach(k=>st[k]=$(k==="adhd"?"cAdhd":k==="ass"?"cAss":k==="lrs"?"cLrs":k==="reward"?"cReward":k==="support"?"cSupport":k==="breaks"?"cBreaks":k==="voice"?"cVoice":"cVisual").checked);
+ st.goal=Math.max(1,Number($("cGoal").value)||5);st.rewardMin=Math.max(1,Number($("cRewardMin").value)||30);
+ st.media=Math.max(0,Number($("cMedia").value)||0);st.games=Math.max(0,Number($("cGames").value)||0);
+ ["mediaFrom","mediaTo","gamesFrom","gamesTo","schoolFrom","schoolTo","rewardTrigger"].forEach(k=>st[k]=$(k).value);
+ currentChild().settings=st; saveState(); renderCore();
+ $("parentStatus").textContent="✓ Einstellungen für „"+currentChild().name+"“ gespeichert.";
+}
+function addStar(){const st=childSettings();state.stars=Math.min(st.goal,state.stars+1);saveState();renderCore();$("learnResult").textContent=state.stars>=st.goal?"🎉 Belohnungsziel erreicht!":"⭐ Lernschritt gespeichert.";}
+function saveState(){try{localStorage.setItem("heroProState",JSON.stringify(state));}catch(e){}}
+function loadState(){try{const x=JSON.parse(localStorage.getItem("heroProState")||"null");if(x){Object.assign(state,x);state.profiles=(x.profiles||[]).map(p=>Object.assign({settings:{}},p));if(!state.profiles.length)state.profiles=[{id:"child-1",name:"Kind",role:"Kind",icon:"🧒",settings:{}}];}}catch(e){}}
+function renderSchedule(){
+ $("schedule").innerHTML=state.steps.map((s,i)=>`<div class="step ${s[2]?"done":""}">
+   <div class="pic" onclick="toggleStep(${i})">${s[1]}</div>
+   <div style="flex:1" onclick="toggleStep(${i})"><b>${esc(s[0])}</b><div class="small">${s[2]?"Erledigt":"Als nächstes"}</div></div>
+   <span onclick="toggleStep(${i})">${s[2]?"✓":"○"}</span>
+   <button class="edit-mini" title="Schritt ändern" onclick="event.stopPropagation();editStep(${i})">Ändern</button><button class="delete-mini" title="Schritt löschen" onclick="event.stopPropagation();deleteStep(${i})">Löschen</button>
+ </div>`).join("");
+}
+function toggleStep(i){if(!state.steps[i])return;state.steps[i][2]=!state.steps[i][2];saveState();renderSchedule();}
+function deleteStep(i){if(!state.steps[i])return;state.steps.splice(i,1);saveState();renderSchedule();}
+function resetSchedule(){state.steps.forEach(s=>s[2]=false);saveState();renderSchedule();}
+function editStep(i){const p=state.steps[i];if(!p)return;const n=prompt("Schritt ändern:",p[0]);if(n===null)return;const clean=n.trim();if(!clean)return;p[0]=clean;saveState();renderSchedule();}
+function addCustomStep(){
+ const n=$("newStep").value.trim();if(!n){alert("Bitte einen Schritt eingeben.");return;}
+ const icon=$("newIcon").value.trim()||"🖼️";
+ state.steps.push([n,icon,false]);$("newStep").value="";$("newIcon").value="";
+ renderSchedule();saveState();
+}
+function addStep(){show("daily");$("newStep").focus();}
+function dictation(){
+ const key=$("grade").value,grade=key.match(/^\\d+/)?.[0]||"1",half=key.includes("2. Halbjahr")?"2.":"1.";
+ const texts={"1":"Heute ist ein schöner Schultag. Mia geht mit ihrem Ranzen zur Schule.","2":"Die Kinder lesen eine Geschichte und schreiben neue Wörter in ihr Heft.","3":"Im Frühling erwacht die Natur. Die Bäume bekommen grüne Blätter.","4":"Eine Reise beginnt mit guter Planung. Die Kinder freuen sich auf das Abenteuer.","5":"Wasser ist für Menschen, Tiere und Pflanzen lebenswichtig.","6":"Gute Lernstrategien helfen dabei, schwierige Aufgaben Schritt für Schritt zu bearbeiten.","7":"Wer einen Text genau liest, kann wichtige Informationen erkennen und zusammenfassen.","8":"Beim Lernen helfen klare Ziele, regelmäßige Pausen und eine gute Vorbereitung.","9":"Ein argumentativer Text braucht nachvollziehbare Gründe und passende Beispiele.","10":"Wissenschaftliche Erkenntnisse entstehen durch Beobachtung, Prüfung und nachvollziehbare Begründung.","11":"Komplexe Zusammenhänge lassen sich besser verstehen, wenn man Begriffe definiert und miteinander verknüpft.","12":"Eine sorgfältige Analyse trennt Beobachtung, Interpretation und begründete Schlussfolgerung.","13":"Die Aufgabe besteht darin, selbstständig zu argumentieren und Belege kritisch zu bewerten."};
+ const t0=texts[grade]||texts["1"];$("dictationText").textContent=`${grade}. Klasse · ${half} Halbjahr: ${t0}`;
+ if(!("speechSynthesis" in window))return;speechSynthesis.cancel();
+ const rate=Math.min(1.05,Math.max(.8,Number($("dictSpeed").value||.95))),pause=Math.min(2,Math.max(.2,Number($("dictPause").value||.45)));
+ const words=t0.match(/[^\\s]+/g)||[t0];let voices=speechSynthesis.getVoices?speechSynthesis.getVoices():[],voice=voices.find(v=>/^de(-|_)/i.test(v.lang))||voices.find(v=>/deutsch|german/i.test(v.name)),i=0;
+ const next=()=>{if(i>=words.length)return;const u=new SpeechSynthesisUtterance(words[i++]);u.lang="de-DE";u.rate=rate;u.pitch=1;u.volume=1;if(voice)u.voice=voice;u.onend=()=>setTimeout(next,pause*1000);u.onerror=()=>setTimeout(next,pause*1000);speechSynthesis.speak(u);};next();
+}
+function learn(){const f=$("subject").value,t=$("topic").value.trim()||"ein Thema aus dem aktuellen Schulstoff";$("learnResult").innerHTML=`<div class="interactive-panel"><b>🧠 ${esc(f)} · ${esc(t)}</b><p>Wähle eine kleine Aufgabe. Nach dem Abschluss bekommst du einen Stern.</p><div class="grid3"><button class="feature btn" onclick="completeLearning('Aufgabe 1 geschafft')">Aufgabe 1 ✓</button><button class="feature btn" onclick="completeLearning('Aufgabe 2 geschafft')">Aufgabe 2 ✓</button><button class="feature btn" onclick="completeLearning('Lernziel erreicht')">Aufgabe 3 ⭐</button></div><div id="learnTaskResult" class="ok" style="margin-top:10px">Bereit.</div></div>`;}
+function completeLearning(msg){const st=childSettings();if(st.reward!==false){state.stars=Math.min(st.goal,state.stars+1);saveState();renderCore();}$("learnTaskResult").textContent=state.stars>=st.goal?"🎉 "+msg+" – Belohnungsziel erreicht!":"✓ "+msg+" – +1 Stern. Jetzt "+state.stars+" von "+st.goal+" Sternen.";}
+function startVoiceInput(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("answer").textContent="🎙️ Dein Browser unterstützt keine Spracheingabe. Bitte die Frage eintippen.";return;}const r=new SR();r.lang="de-DE";r.interimResults=false;r.maxAlternatives=1;$("answer").textContent="🎙️ Ich höre zu …";r.onresult=e=>{$("ask").value=e.results[0][0].transcript;askHero();};r.onerror=()=>{$("answer").textContent="🎙️ Mikrofon konnte nicht gestartet werden. Bitte Mikrofon-Berechtigung erlauben.";};try{r.start();}catch(e){$("answer").textContent="🎙️ Mikrofon konnte nicht gestartet werden.";}}
+function askHero(){const q=$("ask").value.trim().toLowerCase();let a=q.includes("morgen")?"Ich kann dir gespeicherte Termine, Stundenplan und Aufgaben für morgen vorlesen.":q.includes("lernen")?"Wir können jetzt gemeinsam mit deinem Schulstoff lernen.":"Ich bin bereit. Frag mich nach Lernen, Terminen, Tagesplan oder Schule.";state.lastAnswer=a;$("answer").textContent="🗣️ "+a;}
+function speak(){if(state.lastAnswer&&"speechSynthesis"in window)speechSynthesis.speak(new SpeechSynthesisUtterance(state.lastAnswer));}
+function vocab(){const w=$("word").value.trim()||"school";syncLanguageContext();$("vocabResult").textContent=`📚 ${$("lang").value}: Vokabel „${w}“ · ${$("vocabSystem").value} · ${$("vocabGrade").value} · ${$("vocabHalf").value}.`;}
+function startLanguage(){const l=($("lang").value==="Weitere Sprache"?$("customLang").value.trim():$("lang").value)||$("lang").value;$("langResult").textContent=`🌍 ${l}: Lernkurs passend zu ${$("appSystem").value}, ${$("appGrade").value}, ${$("appHalf").value}.`;}
+function dialog(){$("langResult").textContent="🗣️ Dialogübung gestartet: Hero spricht mit dir und passt Fragen an deinen Lernstand an.";}
+function sign(){
+ const topic=$("signTopic").value;
+ $("signResult").innerHTML=`<div class="interactive-panel"><b>🤟 ${esc($("signLanguage").value)} · ${esc(topic)}</b><p>Übung gestartet. Wähle eine Gebärde:</p><div class="grid3"><button class="feature btn" onclick="signPick('Hallo 👋')">Hallo 👋</button><button class="feature btn" onclick="signPick('Danke 🙏')">Danke 🙏</button><button class="feature btn" onclick="signPick('Bitte 🤲')">Bitte 🤲</button><button class="feature btn" onclick="signPick('Essen 🍎')">Essen 🍎</button><button class="feature btn" onclick="signPick('Trinken 🥤')">Trinken 🥤</button><button class="feature btn" onclick="signPick('Hilfe 🆘')">Hilfe 🆘</button></div><div id="signPickResult" class="ok" style="margin-top:10px">Tippe auf eine Gebärde.</div></div>`;
+}
+function signPick(x){$("signPickResult").textContent="✓ "+x+" ausgewählt. Nächste Gebärde bereit.";}
+function cards(){
+ const presets=[["🪥","Zähne putzen"],["👕","Anziehen"],["🍞","Frühstück"],["🎒","Tasche packen"],["🚌","Zum Bus"],["🏫","Zur Schule"],["🍽️","Essen"],["🛏️","Schlafen"]];
+ $("signResult").innerHTML=`<div class="interactive-panel"><b>🖼️ Bild-Kommunikationskarten</b><p>Wähle Karten aus und stelle deine eigene Reihenfolge zusammen.</p><div id="cardChoices" class="grid3">${presets.map((x,i)=>`<button class="feature btn" onclick="addCommCard(${i})">${x[0]} ${x[1]}</button>`).join("")}</div><div id="selectedCards" class="list" style="margin-top:10px">Noch keine Karten ausgewählt.</div><div class="actions"><button class="btn soft" onclick="clearCommCards()">Alles löschen</button></div></div>`;
+ window._commCards=[];
+}
+function addCommCard(i){
+ const p=[["🪥","Zähne putzen"],["👕","Anziehen"],["🍞","Frühstück"],["🎒","Tasche packen"],["🚌","Zum Bus"],["🏫","Zur Schule"],["🍽️","Essen"],["🛏️","Schlafen"]][i];
+ window._commCards=window._commCards||[];window._commCards.push(p);
+ $("selectedCards").innerHTML=window._commCards.map((x,j)=>`<div class="item">${j+1}. ${x[0]} <b>${x[1]}</b><button class="delete-mini" onclick="removeCommCard(${j})">Löschen</button></div>`).join("");
+}
+function removeCommCard(i){window._commCards.splice(i,1);$("selectedCards").innerHTML=window._commCards.length?window._commCards.map((x,j)=>`<div class="item">${j+1}. ${x[0]} <b>${x[1]}</b><button class="delete-mini" onclick="removeCommCard(${j})">Löschen</button></div>`).join(""):"Noch keine Karten ausgewählt.";}
+function clearCommCards(){window._commCards=[];$("selectedCards").textContent="Noch keine Karten ausgewählt.";}
+function supportStart(x){
+ const exercises={Logopädie:["Wort nachsprechen","Bild benennen","Satz vervollständigen"],Ergo:["Fingerfolge","Linie nachfahren","Formen sortieren"],Aufmerksamkeit:["Ziel finden","Reihenfolge merken","Stopp-Signal"],Wahrnehmung:["Geräusch erkennen","Form finden","Muster ergänzen"],ASS:["Ablauf ordnen","Gefühl auswählen","Übergang vorbereiten"],LRS:["Laut erkennen","Wort lesen","Buchstaben ordnen"],"Verhalten & Selbstregulation":["Gefühl erkennen","Atem-Pause","Übergang üben"],"Exekutive Funktionen":["Aufgabe planen","Zeit schätzen","Schritte ordnen"]};
+ const arr=exercises[x]||["Übung 1","Übung 2","Übung 3"];
+ $("supportResult").innerHTML=`<div class="interactive-panel"><b>🧩 ${esc(x)} – Übung gestartet</b><p>Wähle eine Aufgabe:</p><div class="grid3">${arr.map((a,i)=>`<button class="feature btn" onclick="supportExercise(${i},'${esc(x)}')">${esc(a)}</button>`).join("")}</div><div id="supportExerciseResult" class="ok" style="margin-top:10px">Noch keine Aufgabe gewählt.</div></div>`;
+}
+function supportExercise(i,x){$("supportExerciseResult").textContent="✓ "+x+": Aufgabe "+(i+1)+" ist geöffnet. Du kannst sie jetzt bearbeiten.";}
+function completeSupport(){addStar();$("supportExerciseResult").insertAdjacentHTML("beforeend"," <b>+1 Stern</b>");}
+function preschool(){
+ $("preResult").innerHTML=`<div class="interactive-panel"><b>🧸 Vorschulübung</b><p>Wähle einen Bereich:</p><div class="grid3"><button class="feature btn" onclick="preschoolExercise('Zahlen & Mengen')">🔢 Zahlen & Mengen</button><button class="feature btn" onclick="preschoolExercise('Sprache & Laute')">🔤 Sprache & Laute</button><button class="feature btn" onclick="preschoolExercise('Farben & Formen')">🎨 Farben & Formen</button><button class="feature btn" onclick="preschoolExercise('Konzentration')">🧩 Konzentration</button><button class="feature btn" onclick="preschoolExercise('Feinmotorik')">✋ Feinmotorik</button><button class="feature btn" onclick="preschoolExercise('Zuhören & Verstehen')">👂 Zuhören</button></div><div id="preExerciseResult" class="ok" style="margin-top:10px">Wähle einen Bereich.</div></div>`;
+}
+function preschoolExercise(x){$("preExerciseResult").textContent="✓ "+x+" geöffnet. Nächste Übung ist bereit.";}
+function completePreschool(){addStar();$("preExerciseResult").insertAdjacentHTML("beforeend"," <b>+1 Stern</b>");}
+function createGroup(){const n=$("groupName").value.trim()||"Neue Lerngruppe";$("groupList").insertAdjacentHTML("beforeend",`<div class="item">👥 <b>${esc(n)}</b> · Chat · Audio · Video</div>`);$("groupName").value="";}
+function sendChat(){const x=$("chatInput").value.trim();if(!x)return;$("chat").insertAdjacentHTML("beforeend",`<div class="bubble me">${esc(x)}</div>`);$("chatInput").value="";$("chat").scrollTop=$("chat").scrollHeight;}
+function voice(){ $("mediaStatus").textContent="🎤 Sprachnachricht: Aufnahmefunktion ist für die sichere Medienanbindung vorgesehen."; }
+function video(){ $("mediaStatus").textContent="📹 Videoanruf: Einzelvideo wird über einen sicheren Echtzeitdienst angebunden."; }
+function groupVideo(){ $("mediaStatus").textContent="👥 Gruppen-Video: Gruppenanruf wird über einen sicheren Echtzeitdienst angebunden."; }
+function groupPic(){ $("mediaStatus").textContent="📷 Gruppenbild: Galerie/Kamera-Auswahl ist für die App-Berechtigung vorgesehen."; }
+function directMsg(){const to=$("to").value.trim(),m=$("msg").value.trim();$("directResult").textContent=to&&m?`✓ Nachricht an ${to} vorbereitet.`:"Bitte Empfänger und Nachricht eingeben.";}
+function schoolMode(){$("schoolStatus").textContent=`📵 Schulmodus: ${$("sf").value}–${$("st").value} gespeichert. Echte Gerätesperre benötigt Geräteverwaltung.`;}
+function gps(){if(!$("gpsConsent").checked){$("gpsStatus").textContent="Bitte zuerst die Standortfreigabe aktivieren.";return}if(!navigator.geolocation){$("gpsStatus").textContent="GPS wird von diesem Gerät/Browser nicht bereitgestellt.";return}$("gpsStatus").textContent="📍 Standort wird geprüft …";navigator.geolocation.getCurrentPosition(p=>$("gpsStatus").textContent=`📍 Standort verfügbar · Genauigkeit ca. ${Math.round(p.coords.accuracy)} m.`,e=>$("gpsStatus").textContent="Standort konnte nicht abgerufen werden.");}
+function saveAppSettings(){
+ const cfg={
+   country:$("appCountry")?.value||"",
+   region:$("appRegion")?.value||"",
+   system:$("appSystem")?.value||"",
+   grade:$("appGrade")?.value||"",
+   half:$("appHalf")?.value||"",
+   year:$("appYear")?.value||""
+ };
+ try{localStorage.setItem("heroProApp",JSON.stringify(cfg));}catch(e){}
+ if($("appSettingsStatus"))$("appSettingsStatus").textContent="✓ Land, Region, Schulsystem, Klasse, Halbjahr und Schuljahr gespeichert.";
+ syncLanguageContext();
+}
+function saveSchool(){
+ const c=$("appCountry")?.value||"Deutschland",r=$("appRegion")?.value||"Region",sy=$("appSystem")?.value||"Schulsystem",g=$("appGrade")?.value||"Klasse",h=$("appHalf")?.value||"Halbjahr",y=$("appYear")?.value||"";
+ localStorage.setItem("heroProApp",JSON.stringify({country:c,region:r,system:sy,grade:g,half:h,year:y}));
+ $("schoolProfileStatus").textContent=`✓ Schulprofil gespeichert: ${c} · ${r} · ${sy} · ${g} · ${h}.`;
+ syncLanguageContext();
+}
+function schoolSave(){
+ const fields=[...document.querySelectorAll("#school input, #school select")].map(x=>x.value);
+ try{localStorage.setItem("heroProSchoolForm",JSON.stringify(fields));}catch(e){}
+ if($("schoolProfileStatus"))$("schoolProfileStatus").textContent="✓ Schulangaben gespeichert.";
+}
+let musicCtx=null,musicOsc=null,musicGain=null;
+function focusMusic(){toggleFocusMusic(true);}
+function toggleFocusMusic(force){const on=force===true?true:!document.body.classList.contains("focus-music-on");document.body.classList.toggle("focus-music-on",on);const btn=$("floatingMusic");btn.classList.toggle("on",on);btn.textContent=on?"🎧":"🎵";if(on){try{musicCtx=musicCtx||new(window.AudioContext||window.webkitAudioContext)();if(musicCtx.state==="suspended")musicCtx.resume();if(!musicOsc){musicOsc=musicCtx.createOscillator();musicGain=musicCtx.createGain();musicOsc.type="sine";musicOsc.frequency.value=220;musicGain.gain.value=.025;musicOsc.connect(musicGain);musicGain.connect(musicCtx.destination);musicOsc.start();}else musicGain.gain.value=.025;}catch(e){}$("pauseResult").textContent="🎧 Konzentrationsmusik ist an.";}else{if(musicGain)musicGain.gain.value=0;$("pauseResult").textContent="🎧 Konzentrationsmusik ist aus.";}}
+function pauseGame(x){$("pauseResult").textContent="🎮 "+x+" gestartet – gemeinsam mit den freigegebenen Klassenkameraden spielbar.";}
+function schoolModule(x){
+ if(x==="Stundenplan"){
+   const d=new Date().toISOString().slice(0,10);
+   $("schoolModuleResult").innerHTML=`<div class="interactive-panel"><b>📅 Stundenplan</b><p>Änderungen gelten nur für den ausgewählten Tag und fallen danach automatisch weg.</p><div class="row"><input id="tempDate" type="date" value="${d}"><input id="tempLesson" placeholder="z. B. 3. Stunde"><input id="tempReason" placeholder="z. B. entfällt"></div><button class="btn primary" onclick="saveTempLesson()">Nur für diesen Tag speichern</button><div id="tempLessonResult" class="ok" style="margin-top:10px">Keine temporäre Änderung.</div></div>`;
+   return;
+ }
+ $("schoolModuleResult").textContent="🏫 "+x+" geöffnet.";
+}
+function saveTempLesson(){
+ const date=$("tempDate").value,lesson=$("tempLesson").value.trim(),reason=$("tempReason").value.trim()||"Stunde entfällt";
+ if(!date||!lesson){alert("Bitte Tag und Stunde eingeben.");return;}
+ const today=new Date().toISOString().slice(0,10);
+ if(date<today){$("tempLessonResult").textContent="Dieser Tag liegt bereits in der Vergangenheit.";return;}
+ state.tempChanges=state.tempChanges||{};state.tempChanges[date]=state.tempChanges[date]||[];
+ state.tempChanges[date].push({lesson,reason});
+ saveState();
+ $("tempLessonResult").textContent="✓ Nur am "+date+" geändert. Danach gilt wieder der normale Stundenplan.";
+}
+function classModule(x){
+ if(!$("classModuleResult"))return;
+ if(x==="Stundenplan"){schoolModule("Stundenplan");return;}
+ $("classModuleResult").innerHTML=`🏫 <b>${esc(x)}</b> geöffnet.<br><span class="small">Dieser Bereich ist getrennt vom Kinder-Lernbereich und wird nach Rolle und Freigaben angezeigt.</span>`;
+}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
+try{const cfg=JSON.parse(localStorage.getItem("heroProApp")||"null");if(cfg){
+ setTimeout(()=>{if($("appCountry"))$("appCountry").value=cfg.country||$("appCountry").value;if($("appRegion"))$("appRegion").value=cfg.region||$("appRegion").value;if($("appSystem"))$("appSystem").value=cfg.system||$("appSystem").value;if($("appGrade"))$("appGrade").value=cfg.grade||$("appGrade").value;if($("appHalf"))$("appHalf").value=cfg.half||$("appHalf").value;if($("appYear"))$("appYear").value=cfg.year||$("appYear").value;syncLanguageContext();},0);
+}}catch(e){}
+let gameTimer=null;
+function startGame(name){
+  clearTimeout(gameTimer); const out=$("gameResult");
+  out.innerHTML='';
+  const title=document.createElement('h3'); title.textContent='🎮 '+name; out.appendChild(title);
+  const p=document.createElement('p'); p.textContent='Runde starten.'; out.appendChild(p);
+  const btn=document.createElement('button'); btn.className='btn primary'; btn.textContent='Start';
+  btn.onclick=function(){ if(name==='Reaktionsspiel'){ reactionStart(); } else if(name==='Memory'){ memoryRound(); } else { btn.textContent='✓ Runde geschafft'; }};
+  out.appendChild(btn);
+}
+function memoryRound(){const b=document.createElement('div');b.id='memoryBoard';b.className='grid3';$("gameResult").appendChild(b);['⭐','🌈','🐶','🚀','🎵','🍎'].forEach(v=>{const x=document.createElement('button');x.className='feature btn';x.textContent='❓';x.onclick=()=>x.textContent=v;b.appendChild(x);});}
+function reactionStart(){const out=$("gameResult");out.innerHTML='⏳ Warte…';gameTimer=setTimeout(()=>{const b=document.createElement('button');b.className='btn primary';b.style.fontSize='22px';b.textContent='🟢 JETZT!';b.onclick=reactionHit;out.appendChild(b);},1500+Math.random()*2000);}
+function reactionHit(){$("gameResult").innerHTML='⚡ Schnell! Runde geschafft.';}
+let selectedAudio=null;
+function playSelectedMusic(){try{selectedAudio=selectedAudio||new(window.AudioContext||window.webkitAudioContext)();if(selectedAudio.state==='suspended')selectedAudio.resume();const o=selectedAudio.createOscillator(),g=selectedAudio.createGain();o.frequency.value=({focus:220,alpha:330,pause:392,nature:247}[document.getElementById('musicChoice')?.value||'focus']||220);g.gain.value=.02;o.connect(g);g.connect(selectedAudio.destination);o.start();window._heroMusic={o,g};$("musicResult").textContent='▶️ Musik läuft.';}catch(e){$("musicResult").textContent='Audio konnte im Browser nicht gestartet werden.';}}
+function stopMusic(){try{if(window._heroMusic){window._heroMusic.gain.gain.value=0;window._heroMusic.o.stop();window._heroMusic=null;}}catch(e){}$("musicResult").textContent='⏹️ Musik gestoppt.';}
+function startInstrument(){const i=$("instrumentChoice").value,e=$("instrumentExercise").value;$("instrumentResult").innerHTML='<b>🎼 '+esc(i)+'</b>: '+esc(e)+' gestartet.';const b=document.createElement('button');b.className='btn soft';b.textContent='🔊 Beispielton';b.onclick=playNote;$("instrumentResult").appendChild(document.createElement('br'));$("instrumentResult").appendChild(b);}
+function playNote(){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.frequency.value=261.63;g.gain.value=.04;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.5);}catch(e){}}
+
+function initSelectors(){
+ const grades=[...Array(13)].map((_,i)=>i+1);
+ const halfGrades=grades.flatMap(i=>[`${i}. Klasse – 1. Halbjahr`,`${i}. Klasse – 2. Halbjahr`]);
+ ["appGrade","vocabGrade"].forEach(id=>{const el=$(id);if(el)el.innerHTML=halfGrades.map(x=>`<option>${x}</option>`).join("");});
+ const sg=$("schoolGrade");if(sg)sg.innerHTML=halfGrades.map(x=>`<option>${x}</option>`).join("");
+ const countries=["Deutschland","Österreich","Schweiz","Frankreich","Belgien","Niederlande","Luxemburg","Dänemark","Schweden","Norwegen","Finnland","Island","Polen","Tschechien","Slowakei","Slowenien","Kroatien","Serbien","Bosnien und Herzegowina","Rumänien","Ungarn","Bulgarien","Griechenland","Italien","Spanien","Portugal","Vereinigtes Königreich","Irland","USA","Kanada","Mexiko","Brasilien","Argentinien","Chile","Australien","Neuseeland","Japan","Südkorea","China","Indien","Türkei","Israel","Saudi-Arabien","Südafrika","Weitere Länder"];
+ const ac=$("appCountry");if(ac)ac.innerHTML=countries.map(x=>`<option>${x}</option>`).join("");
+ syncLanguageContext();
+}
+
+try{loadState();}catch(e){}
+try{state.accountName=localStorage.getItem("heroProAccountName")||state.accountName||"";if($("accountName"))$("accountName").value=state.accountName;}catch(e){}
+try{initSelectors();}catch(e){console.error(e)}
+try{renderCore();}catch(e){console.error(e)}
+try{renderProfiles();}catch(e){console.error(e)}
+try{renderSchedule();}catch(e){console.error(e)}
+try{applyRoleUI();}catch(e){console.error(e)}
+
+/* Hero Pro v11 functional additions */
+let hpAudio=null, hpOsc=[], hpTimer=null;
+function hpTone(freq,duration=0.28,delay=0){
+  if(!hpAudio) hpAudio=new (window.AudioContext||window.webkitAudioContext)();
+  const o=hpAudio.createOscillator(), g=hpAudio.createGain();
+  o.type="sine"; o.frequency.value=freq; g.gain.value=.035;
+  o.connect(g); g.connect(hpAudio.destination);
+  const t=hpAudio.currentTime+delay; o.start(t); g.gain.setValueAtTime(.035,t);
+  g.gain.exponentialRampToValueAtTime(.001,t+duration); o.stop(t+duration+.02); hpOsc.push(o);
+}
+function playSelectedMusic(){
+  const m=document.getElementById("musicMode")?.value||"focus";
+  if(hpTimer) clearInterval(hpTimer);
+  const seq=m==="calm"?[220,247,262,294]:m==="pause"?[262,330,392,330]:[196,220,247,220];
+  seq.forEach((f,i)=>hpTone(f,.5,i*.55));
+  document.getElementById("musicResult").textContent="🎵 "+(m==="focus"?"Konzentrationsmusik":m==="calm"?"Ruhige Musik":"Pausenmusik")+" läuft.";
+}
+function stopSelectedMusic(){
+  if(hpTimer) clearInterval(hpTimer);
+  hpOsc.forEach(o=>{try{o.stop()}catch(e){}});
+  hpOsc=[]; if(document.getElementById("musicResult")) document.getElementById("musicResult").textContent="⏹️ Musik gestoppt.";
+}
+function openInstrument(name){
+  const notes={Klavier:["C4","D4","E4","F4","G4"],Gitarre:["E3","A3","D4","G4","B4"],Keyboard:["C4","E4","G4","C5"],Ukulele:["G4","C4","E4","A4"],Schlagzeug:["Kick","Snare","Hi-Hat","Kick","Snare"]};
+  const a=notes[name]||["C4","D4","E4"];
+  document.getElementById("instrumentResult").innerHTML="<b>🎼 "+name+" – Übung</b><p>Spiele die Folge nach:</p><div class='actions'>"+a.map((n,i)=>"<button class='btn soft' onclick='hpInstrumentNote("+i+",\\""+name+"\\")'>"+n+"</button>").join("")+"</div><div id='instrumentFeedback' class='ok' style='margin-top:8px'>Bereit.</div>";
+}
+function hpInstrumentNote(i,name){
+  const freqs=[261.63,293.66,329.63,349.23,392,440];
+  hpTone(freqs[i%freqs.length],.35);
+  const f=document.getElementById("instrumentFeedback"); if(f) f.textContent="✓ "+name+": Ton/Schlag "+(i+1)+" gespielt.";
+}
+function startMemoryGame(){
+  const a=["🐶","🐱","🦊","🐼"], deck=[...a,...a].sort(()=>Math.random()-.5);
+  document.getElementById("gameArea").innerHTML="<b>🧠 Memory</b><div class='grid3' style='margin-top:10px'>"+deck.map((x,i)=>"<button class='feature btn' id='m"+i+"' onclick='memoryFlip("+i+",\\""+x+"\\")'>❓</button>").join("")+"</div><div id='memoryStatus' class='ok' style='margin-top:10px'>Finde die Paare.</div>";
+  window.hpMemory={deck,open:[],matched:0};
+}
+function memoryFlip(i,x){
+  const s=window.hpMemory;if(!s||s.open.includes(i)||document.getElementById("m"+i).textContent!=="❓")return;
+  document.getElementById("m"+i).textContent=x;s.open.push(i);
+  if(s.open.length===2){const [a,b]=s.open;if(s.deck[a]===s.deck[b]){s.matched++;s.open=[];if(s.matched===4)document.getElementById("memoryStatus").textContent="🎉 Geschafft!";}else setTimeout(()=>{document.getElementById("m"+a).textContent="❓";document.getElementById("m"+b).textContent="❓";s.open=[]},650);}
+}
+function startReactionGame(){document.getElementById("gameArea").innerHTML="<b>⚡ Reaktionsspiel</b><p>Drücke den Button so schnell wie möglich.</p><button class='btn primary' onclick='reactionHit()'>JETZT!</button><div id='reactionStatus' class='ok' style='margin-top:10px'>Bereit.</div>";}
+function reactionHit(){const t=performance.now();document.getElementById("reactionStatus").textContent="⚡ Reaktion erfasst: "+Math.round((t%900)+100)+" ms (Übungswert).";}
+function startQuizGame(){const qs=[["Wie viele Tage hat eine Woche?",7],["Wie viele Seiten hat ein Dreieck?",3],["Was ist 5+3?",8]];const q=qs[Math.floor(Math.random()*qs.length)];document.getElementById("gameArea").innerHTML="<b>❓ Mini-Quiz</b><p>"+q[0]+"</p><input id='quizAnswer' inputmode='numeric'><button class='btn primary' onclick='checkQuiz("+q[1]+")'>Prüfen</button><div id='quizStatus' class='ok' style='margin-top:10px'></div>";}
+function checkQuiz(n){const v=Number(document.getElementById("quizAnswer").value);document.getElementById("quizStatus").textContent=v===n?"🎉 Richtig!":"Noch einmal versuchen.";}
+function startWordGame(){document.getElementById("gameArea").innerHTML="<b>🔤 Wortspiel</b><p>Ordne die Buchstaben von <b>HERO</b>.</p><input id='wordAnswer'><button class='btn primary' onclick='checkWord()'>Prüfen</button><div id='wordStatus' class='ok' style='margin-top:10px'></div>";}
+function checkWord(){const v=(document.getElementById("wordAnswer").value||"").trim().toUpperCase();document.getElementById("wordStatus").textContent=v==="HERO"?"🎉 Richtig!":"Versuche es noch einmal.";}
+
+
+function requestGoogleConnection(){
+  const ok=$("googleConsent")?.checked;
+  const st=$("googleStatus");
+  if(!ok){if(st)st.textContent="Bitte zuerst die ausdrückliche Zustimmung aktivieren.";return;}
+  try{localStorage.setItem("heroProGoogleConsent","true");}catch(e){}
+  if(st)st.textContent="✓ Zustimmung gespeichert. Die offizielle Google-/Gemini-Autorisierung kann jetzt über die vorgesehene Schnittstelle gestartet werden.";
+}
+function revokeGoogleConnection(){
+  try{localStorage.removeItem("heroProGoogleConsent");}catch(e){}
+  if($("googleConsent"))$("googleConsent").checked=false;
+  if($("googleStatus"))$("googleStatus").textContent="Google-/Gemini-Freigabe widerrufen.";
+}
+function loadGoogleConsent(){
+  try{
+    const ok=localStorage.getItem("heroProGoogleConsent")==="true";
+    if($("googleConsent"))$("googleConsent").checked=ok;
+    if($("googleStatus")&&ok)$("googleStatus").textContent="✓ Google-/Gemini-Freigabe ist lokal vorgemerkt.";
+  }catch(e){}
+}
+
+loadGoogleConsent();
+
+/* Hero Pro v13: unified tasks, stars, optional digital rewards */
+function rewardConfig(){
+  try{return Object.assign({mode:"stars",goal:5,custom:"",app:"",minutes:30},JSON.parse(localStorage.getItem("heroProReward")||"{}"));}catch(e){return {mode:"stars",goal:5,custom:"",app:"",minutes:30};}
+}
+function saveRewardSettings(){
+  const cfg={mode:$("rewardMode")?.value||"stars",goal:Math.max(1,Number($("rewardGoal")?.value||5)),custom:$("customReward")?.value||"",app:$("digitalRewardApp")?.value||"",minutes:Math.max(1,Number($("digitalRewardMinutes")?.value||30))};
+  localStorage.setItem("heroProReward",JSON.stringify(cfg));
+  if($("rewardSettingsStatus"))$("rewardSettingsStatus").textContent="✓ Belohnungseinstellungen gespeichert. Digitale Freigabe wird nur bei entsprechendem Modus vorbereitet.";
+  renderRewardStars();
+}
+function rewardStars(){
+  try{return Number(localStorage.getItem("heroProRewardStars")||0);}catch(e){return 0;}
+}
+function renderRewardStars(){
+  const c=rewardConfig(), st=rewardStars();
+  if($("rewardStarsDisplay"))$("rewardStarsDisplay").textContent=st+" / "+c.goal+" ⭐";
+}
+function resetRewardStars(){
+  localStorage.setItem("heroProRewardStars","0");
+  if($("rewardResult"))$("rewardResult").textContent="⭐ Sterne zurückgesetzt.";
+  renderRewardStars();
+}
+function completeRewardTask(type){
+  const c=rewardConfig(), before=rewardStars(), after=Math.min(before+1,c.goal);
+  localStorage.setItem("heroProRewardStars",String(after));
+  if($("rewardResult"))$("rewardResult").textContent="✓ "+type+" abgeschlossen. +1 ⭐ ("+after+"/"+c.goal+").";
+  renderRewardStars();
+  if(after>=c.goal){
+    let msg="🎉 Sternziel erreicht!";
+    if(c.custom)msg+=" Eigene Belohnung: "+c.custom+".";
+    if(c.mode==="digital"||c.mode==="both"){
+      msg+=" 🔓 Digitale Freigabe ist für "+(c.app||"die ausgewählte App")+" für "+c.minutes+" Minuten vorbereitet.";
+      localStorage.setItem("heroProDigitalGrant",JSON.stringify({app:c.app,minutes:c.minutes,createdAt:Date.now(),active:true}));
+    }
+    if($("rewardResult"))$("rewardResult").textContent=msg;
+  }
+}
+function submitTask(){
+  const title=($("taskTitle")?.value||"").trim(), subject=($("taskSubject")?.value||"").trim(), file=$("taskPhoto")?.files?.[0];
+  if(!title){if($("taskStatus"))$("taskStatus").textContent="Bitte zuerst eine Aufgabe eintragen.";return;}
+  const item={title,subject,photoName:file?.name||"",submittedAt:new Date().toISOString(),status:"eingereicht"};
+  try{const list=JSON.parse(localStorage.getItem("heroProTasks")||"[]");list.push(item);localStorage.setItem("heroProTasks",JSON.stringify(list));}catch(e){}
+  if($("taskStatus"))$("taskStatus").textContent="📤 "+title+" eingereicht"+(file?" – Foto ausgewählt.":" – ohne Foto.")+". Eltern können die Aufgabe jetzt prüfen und anschließend den Stern vergeben.";
+}
+renderRewardStars();
+
+
+function hpSyncSchoolSelectors(){
+  const c=$("appCountry")?.value||"Deutschland", r=$("appRegion");
+  const maps={
+    Deutschland:["Region auswählen","Baden-Württemberg","Bayern","Berlin","Brandenburg","Hamburg","Hessen","Niedersachsen","Nordrhein-Westfalen","Rheinland-Pfalz","Saarland","Sachsen","Sachsen-Anhalt","Schleswig-Holstein","Thüringen"],
+    Österreich:["Bundesland auswählen","Burgenland","Kärnten","Niederösterreich","Oberösterreich","Salzburg","Steiermark","Tirol","Vorarlberg","Wien"],
+    Schweiz:["Kanton auswählen","Aargau","Basel-Landschaft","Basel-Stadt","Bern","Freiburg","Genf","Graubünden","Luzern","St. Gallen","Schaffhausen","Solothurn","Thurgau","Tessin","Waadt","Wallis","Zug","Zürich"]
+  };
+  if(r){
+    const old=r.value, opts=maps[c]||["Region auswählen","Weitere Region"];
+    r.innerHTML=opts.map(x=>`<option>${x}</option>`).join("");
+    if(opts.includes(old)) r.value=old;
+  }
+  if($("langSchoolContext")) $("langSchoolContext").textContent=`${c} · ${r?.value||"Region"} · ${$("appSystem")?.value||"Schulsystem"} · ${$("appGrade")?.value||"Klasse"}`;
+}
+document.addEventListener("change",e=>{
+  if(e.target?.id==="appCountry") hpSyncSchoolSelectors();
+  if(["appCountry","appRegion","appSystem","appGrade","appHalf","appYear"].includes(e.target?.id)) hpSyncSchoolSelectors();
+});
+setTimeout(hpSyncSchoolSelectors,50);
+
+function heroProSelfTest(){
+  const results=[];
+  const add=(name,ok,detail="")=>results.push((ok?"🟢 ":"🔴 ")+name+(detail?" — "+detail:""));
+  add("Navigation",typeof show==="function");
+  add("Grundeinstellungen",!!$("appCountry")&&!!$("appSystem")&&typeof saveAppSettings==="function");
+  add("Lernen",typeof learn==="function");
+  add("Diktat",typeof dictation==="function"&&!!$("dictationText"));
+  add("Vokabeln",typeof vocab==="function"&&!!$("word"));
+  add("Sprachen",typeof startLanguage==="function"&&!!$("lang"));
+  add("Förderung",typeof supportStart==="function");
+  add("Vorschule",typeof preschool==="function");
+  add("Tagesplan",typeof addCustomStep==="function");
+  add("Lerngruppe",typeof createGroup==="function"&&typeof sendChat==="function");
+  add("Spiele",typeof startMemoryGame==="function"&&typeof startQuizGame==="function");
+  add("Musik",typeof playSelectedMusic==="function"&&typeof stopSelectedMusic==="function");
+  add("Instrumente",typeof openInstrument==="function");
+  add("Sterne",typeof saveRewardSettings==="function"&&typeof completeRewardTask==="function");
+  add("Foto-Aufgabe",!!$("taskPhoto")&&typeof submitTask==="function");
+  add("Google/Gemini-Zustimmung",!!$("googleConsent")&&typeof requestGoogleConnection==="function");
+  add("GPS",typeof gps==="function");
+  add("Schulmodus",typeof schoolMode==="function");
+  const el=$("selfTestResult"); if(el) el.innerHTML=results.map(x=>"<div class='item'>"+x+"</div>").join("");
+}
+</script>
+<button id="floatingMusic" class="floating-music" title="Konzentrationsmusik an/aus" onclick="toggleFocusMusic()">🎵</button></body></html>
